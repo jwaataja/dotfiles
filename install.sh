@@ -6,7 +6,7 @@ but it doesn't need to be installed."
 cp .emacs ~
 mkdir -p ~/.i3
 cp .i3/config ~/.i3
-cp .i3status ~
+cp .i3status.conf ~
 echo "Please reload i3."
 mkdir -p ~/.config
 cp .config/redshift.conf ~/.config
