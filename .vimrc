@@ -21,6 +21,8 @@ Plugin 'romainl/Apprentice'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'sjl/badwolf'
 
+Plugin 'scrooloose/nerdcommenter'
+
 Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
