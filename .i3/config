@@ -293,10 +293,10 @@ bindsym XF86AudioLowerVolume exec amixer set Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ unmute
 
 
-workspace 1 output DVI-I-1
-workspace 2 output HDMI-0
-workspace 3 output DVI-I-1
-workspace 4 output DVI-I-1
+#workspace 1 output DVI-I-1
+#workspace 2 output HDMI-0
+#workspace 3 output DVI-I-1
+#workspace 4 output DVI-I-1
 
 
 workspace_layout tabbed
@@ -328,6 +328,6 @@ assign [class="KeePass2"] 2
 assign [class="Keepassx2"] 2
 
 #exec "dropbox start"
-exec redshift-gtk
-exec discord-canary
-exec xfce4-clipman
+#exec redshift-gtk
+#exec discord-canary
+#exec xfce4-clipman
