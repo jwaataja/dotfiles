@@ -1,5 +1,6 @@
 setlocal cindent
-setlocal cinoptions=>8:0=8+4t0(4
+setlocal cinoptions=>8,:0,=8,+4,t0,(4
+"setlocal cinoptions=>8+4t0(4
 
 setlocal formatoptions=cqtr
 setlocal tabstop=8
