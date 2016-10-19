@@ -21,9 +21,13 @@ Plugin 'romainl/Apprentice'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'sjl/badwolf'
 
+Plugin 'tpope/vim-fugitive'
+
+"Plugin 'roman/golden-ratio'
+
 Plugin 'scrooloose/nerdcommenter'
 
-Plugin 'tpope/vim-fugitive'
+"Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -74,16 +78,29 @@ set scrolloff=5
 " enable external vimrcs for specific projects
 set exrc
 
-
-"to compile if makefile in current directory
-noremap <F4> :wa<CR>:make<CR>
+" set the current directory to the file automatically
+set autochdir
 
 "for airline for some reason
 set laststatus=2
 
+
+
+
+let mapleader=","
+
+"to compile if makefile in current directory
+noremap <F4> :wa<CR>:make<CR>
 "inoremap xx <ESC>
 inoremap xz <ESC>
 inoremap XZ <ESC>
+
+nnoremap <leader>noh :noh<CR>
+
+"nnoremap <space> <Nop>
+"let mapleader = " "
+"map <space> <leader>
+
 
 "to toggle relative number, usually during debugging, probably.
 noremap <leader>rn :set relativenumber!<CR>
@@ -92,8 +109,6 @@ noremap <leader>rn :set relativenumber!<CR>
 inoremap <leader>{ {<enter>}<esc>ko
 
 map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-
 
 
 
@@ -109,7 +124,11 @@ set mouse=a
 
 
 "disables autocommenting
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"set formatoptions-=cro
+set formatoptions-=c
+set formatoptions-=r
+set formatoptions-=o
 
 
 "tabs
@@ -118,6 +137,10 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "set softtabstop=2
 set tabstop=4
 set shiftwidth=4
+
+
+" Set shiftwidth to 72 in git commits.
+au FileType gitcommit set tw=72
 
 "fonts
 "set guifont=DejaVu\ Sans\ Mono\ 11
@@ -130,3 +153,31 @@ set colorcolumn=80
 
 " For making tab completion better
 set switchbuf=useopen,usetab,newtab
+
+let g:ycm_server_python_interpreter="/usr/bin/python2.7"
+
+" Set settings for C files if you want the GNU style.
+function GnuStyle()
+	au FileType c setlocal cindent
+	au FileType c setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
+	au FileType c setlocal shiftwidth=2
+	au FileType c setlocal softtabstop=2
+	au FileType c setlocal textwidth=79
+	au FileType c setlocal fo=cqt
+	"au FileType c setlocal fo-=r
+	"au FileType c setlocal fo-=o
+	"au FileType c setlocal fo-=l
+	"au FileType c setlocal fo+=cqt
+endfunction
+
+function BsdStyle()
+	au FileType c setlocal cindent
+	au FileType c setlocal cinoptions=>8:0=8+4t0(4
+
+	au FileType c setlocal formatoptions=cqtr
+	au FileType c setlocal tabstop=8
+	au FileType c setlocal softtabstop=8
+	au FileType c setlocal shiftwidth=4
+	au FileType c setlocal textwidth=79
+	au FileType c setlocal smarttab
+endfunction

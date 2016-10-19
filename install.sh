@@ -22,4 +22,5 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp .vimrc ~
 mkdir -p ~/.vim/after/ftplugin
 cp c.vim ~/.vim/after/ftplugin
+cp .ycm_extra_conf.py ~
 echo "Please run \"PluginInstall\" in vim."
