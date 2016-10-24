@@ -1,4 +1,4 @@
-#/bin/sh
+#/bin/bash
 
 echo "First install vim, emacs, redshift, and zsh. This installs files for i3
 but it doesn't need to be installed."
