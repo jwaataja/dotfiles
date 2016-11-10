@@ -157,27 +157,27 @@ set switchbuf=useopen,usetab,newtab
 let g:ycm_server_python_interpreter="/usr/bin/python2.7"
 
 " Set settings for C files if you want the GNU style.
-function GnuStyle()
-	au FileType c setlocal cindent
-	au FileType c setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
-	au FileType c setlocal shiftwidth=2
-	au FileType c setlocal softtabstop=2
-	au FileType c setlocal textwidth=79
-	au FileType c setlocal fo=cqt
-	"au FileType c setlocal fo-=r
-	"au FileType c setlocal fo-=o
-	"au FileType c setlocal fo-=l
-	"au FileType c setlocal fo+=cqt
-endfunction
+"function GnuStyle()
+	"au FileType c setlocal cindent
+	"au FileType c setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
+	"au FileType c setlocal shiftwidth=2
+	"au FileType c setlocal softtabstop=2
+	"au FileType c setlocal textwidth=79
+	"au FileType c setlocal fo=cqt
+	""au FileType c setlocal fo-=r
+	""au FileType c setlocal fo-=o
+	""au FileType c setlocal fo-=l
+	""au FileType c setlocal fo+=cqt
+"endfunction
 
-function BsdStyle()
-	au FileType c setlocal cindent
-	au FileType c setlocal cinoptions=>8:0=8+4t0(4
+"function BsdStyle()
+	"au FileType c setlocal cindent
+	"au FileType c setlocal cinoptions=>8:0=8+4t0(4
 
-	au FileType c setlocal formatoptions=cqtr
-	au FileType c setlocal tabstop=8
-	au FileType c setlocal softtabstop=8
-	au FileType c setlocal shiftwidth=4
-	au FileType c setlocal textwidth=79
-	au FileType c setlocal smarttab
-endfunction
+	"au FileType c setlocal formatoptions=cqtr
+	"au FileType c setlocal tabstop=8
+	"au FileType c setlocal softtabstop=8
+	"au FileType c setlocal shiftwidth=4
+	"au FileType c setlocal textwidth=79
+	"au FileType c setlocal smarttab
+"endfunction
