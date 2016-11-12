@@ -22,6 +22,7 @@ Plugin 'nanotech/jellybeans.vim'
 Plugin 'sjl/badwolf'
 
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-dispatch'
 
 "Plugin 'roman/golden-ratio'
 
@@ -49,102 +50,61 @@ filetype plugin indent on    " required
 
 
 
-syntax on "syntax highlighting
 
-"allows better switching of files
+
+
+
+
+
+
+
+
+
+
+" Syntax highlighting.
+syntax on
+
+" Allow better switching of files.
 set hidden
 
 set wildmode=longest,list,full
-"better command-line completion
+" Better command-line completion.
 set wildmenu
 
-"Show partial commands in the last line of the screen
+" Show partial commands in the last line of the screen.
 set showcmd
 
-"show line number
+" Show line numbers.
 set number
 
-"make line numbers relative
+" Make line numbers relative.
 set relativenumber
 
-set cursorline "underlines current line
+" Underlines current line.
+set cursorline
 
 set incsearch "search as characters are entered
-set hlsearch "highlight matches
+" Highlight matches.
+set hlsearch 
 
-"cursor can't be on the top or bottom line
+" Cursor can't be on the top or bottom line.
 set scrolloff=5
 
-" enable external vimrcs for specific projects
+" Enable external vimrcs for specific projects.
 set exrc
 
-" set the current directory to the file automatically
+" Set the current directory to the file automatically.
 set autochdir
 
-"for airline for some reason
+" For airline for some reason
 set laststatus=2
 
-
-
-
-let mapleader=","
-
-"to compile if makefile in current directory
-noremap <F4> :wa<CR>:make<CR>
-"inoremap xx <ESC>
-inoremap xz <ESC>
-inoremap XZ <ESC>
-
-nnoremap <leader>noh :noh<CR>
-
-"nnoremap <space> <Nop>
-"let mapleader = " "
-"map <space> <leader>
-
-
-"to toggle relative number, usually during debugging, probably.
-noremap <leader>rn :set relativenumber!<CR>
-
-"Insert brackets
-inoremap <leader>{ {<enter>}<esc>ko
-
-map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-
-
-"color scheme
-"colorscheme hybrid
-"colorscheme solarized
-colorscheme gruvbox
-set background=dark
-"colorscheme whiplash
-
-"for mouse
+" For mouse.
 set mouse=a
 
 
-"disables autocommenting
-"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-"set formatoptions-=cro
-set formatoptions-=c
-set formatoptions-=r
-set formatoptions-=o
 
 
-"tabs
-"set expandtab
-"set shiftwidth=2
-"set softtabstop=2
-set tabstop=4
-set shiftwidth=4
-
-
-" Set shiftwidth to 72 in git commits.
-au FileType gitcommit set tw=72
-
-"fonts
-"set guifont=DejaVu\ Sans\ Mono\ 11
-set guifont=Source\ Code\ Pro\ 10
 
 "Using zero makes it a maximum of 79, which is what I want.
 set textwidth=80
@@ -154,7 +114,121 @@ set colorcolumn=80
 " For making tab completion better
 set switchbuf=useopen,usetab,newtab
 
-let g:ycm_server_python_interpreter="/usr/bin/python2.7"
+" This is for Gentoo. YouCompleteMe didn't work without it but other systems
+" shouldn't need this.
+"let g:ycm_server_python_interpreter="/usr/bin/python2.7"
+
+" Disables autocommenting.
+"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"set formatoptions-=cro
+set formatoptions-=c
+set formatoptions-=r
+set formatoptions-=o
+
+" Sets tabs to be represented by four spaces to maake reading files easier. This
+" doesn't make it so that tabs are spaces, and these settings should be
+" overridden in language specific settings such as C.
+set tabstop=4
+set shiftwidth=4
+
+
+
+
+
+" Colors
+"colorscheme hybrid
+"colorscheme solarized
+colorscheme gruvbox
+set background=dark
+"colorscheme whiplash
+
+
+
+
+
+" Fonts
+"set guifont=DejaVu\ Sans\ Mono\ 11
+set guifont=Source\ Code\ Pro\ 10
+
+" Use this font for Windows. It might not work on other systems, though.
+"set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" Key bindings and whatnot.
+
+let mapleader=","
+
+" Runs a build process using vim-dispatch.
+noremap <F4> :Make<CR>
+
+" These are in case you want to exit insert mode faster.
+"inoremap xx <ESC>
+"inoremap xz <ESC>
+"inoremap XZ <ESC>
+
+" Clear the highlighting on strings that were searched
+nnoremap <leader>noh :noh<CR>
+
+" Toggle on and off relative lines numbers.
+noremap <leader>rn :set relativenumber!<CR>
+
+" Insert brackets
+inoremap <leader>{ {<enter>}<esc>ko
+
+" Toggle the background color in colorthemes like solarized or gruvbox.
+map <leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
+" For faster use of vim-fugitive.
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>gg :Git<space>
+
+" For faster executing of shell commands.
+nnoremap <leader>ts :!<space>
+
+" For opening stuff faster.
+nnoremap <leader>te :tabe<space>
+nnoremap <leader>vs :vsp<space>
+
+" For saving stuff faster.
+nnoremap <leader>ww :w<CR>
+nnoremap <leader>wa :wa<CR>
+nnoremap <leader>wq :wq<CR>
+
+" Make it so that I don't have to press the colon key.
+nnoremap <CR> :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" Filetype specific stuff
+
+" Set shiftwidth to 72 in git commits.
+au FileType gitcommit set tw=72
 
 " Set settings for C files if you want the GNU style.
 "function GnuStyle()
