@@ -1,13 +1,3 @@
-"setlocal cindent
-"setlocal cinoptions=>8,:0,=8,+4,t0,(4
-
-"setlocal formatoptions=cqtr
-"setlocal tabstop=8
-"setlocal softtabstop=8
-"setlocal shiftwidth=4
-"setlocal textwidth=79
-"setlocal smarttab
-
 setlocal cindent
 setlocal cinoptions=>8,:0,=8,+4,t0,(4
 
