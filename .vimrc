@@ -66,13 +66,6 @@ filetype plugin indent on    " required
 
 
 
-
-
-
-
-
-
-
 " Syntax highlighting.
 syntax on
 
@@ -200,12 +193,6 @@ set guifont=Source\ Code\ Pro\ 10
 
 
 
-
-
-
-
-
-
 " Key bindings and whatnot.
 
 let mapleader=","
@@ -261,12 +248,6 @@ inoremap ii <Esc>
 
 
 
-
-
-
-
-
-
 " Python stuff
 
 "python with virtualenv support
@@ -278,12 +259,6 @@ inoremap ii <Esc>
   "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   "execfile(activate_this, dict(__file__=activate_this))
 "EOF
-
-
-
-
-
-
 
 
 
