@@ -21,14 +21,26 @@ Plugin 'romainl/Apprentice'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'sjl/badwolf'
 
+"Syntax highlighting
+"For C, choose one of these.
+"Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'justinmk/vim-syntax-extra'
+
+" For git and compiling.
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'
 
 "Plugin 'roman/golden-ratio'
 
+" For easy comment management.
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
 
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
+
+" For Python programming.
+Plugin 'nvie/vim-flake8'
+Plugin 'hynek/vim-python-pep8-indent'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -131,9 +143,36 @@ set formatoptions-=o
 set tabstop=4
 set shiftwidth=4
 
+" Sane backspacing, only required on some platforms.
+set backspace=indent,eol,start
+
+" Display whitespace chars as certain characters. Delete this stuff if you don't
+" want those annoying characters for spaces.
+"set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
+set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
+set list
 
 
 
+
+
+"set termguicolors
+
+"Enable italics in terminal.
+let g:gruvbox_italic=1
+"Get rid ot that annoying bold gruvbox stuff.
+let g:gruvbox_bold=0
+"Other gruvbox stuff.
+let g:gruvbox_underline=1
+let g:gruvbox_undercurl=1
+
+" Highlight trailing whitespace.
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+" Show trailing whitespace and spaces before a tab:
+"match ExtraWhitespace /\s\+$\| \+\ze\t/
+" Show trailing whitespace except when typing at the end of a line.
+match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 
 " Colors
 "colorscheme hybrid
@@ -209,7 +248,36 @@ nnoremap <leader>wa :wa<CR>
 nnoremap <leader>wq :wq<CR>
 
 " Make it so that I don't have to press the colon key.
-nnoremap <CR> :
+"nnoremap <CR> :
+
+" Easy escape.
+inoremap ii <Esc>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" Python stuff
+
+"python with virtualenv support
+"py << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+  "project_base_dir = os.environ['VIRTUAL_ENV']
+  "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  "execfile(activate_this, dict(__file__=activate_this))
+"EOF
 
 
 
