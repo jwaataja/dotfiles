@@ -10,7 +10,7 @@
 
 " My preferred settings. Doesn't indent case labels or C++ scope declarations
 " like public and private.
- setlocal cinoptions=>1s,:0,=s,g0,N-s,t0,(0,U1,Ws
+ setlocal cinoptions=>1s,:0,=s,g0,N-s,t0,(s,U1,Ws
  setlocal cindent
  setlocal shiftwidth=4
  setlocal tabstop=4
