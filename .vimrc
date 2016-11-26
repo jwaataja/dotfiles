@@ -42,6 +42,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'nvie/vim-flake8'
 Plugin 'hynek/vim-python-pep8-indent'
 
+" For formatting code
+Plugin 'rhysd/vim-clang-format'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -206,7 +209,7 @@ noremap <F4> :Make<CR>
 "inoremap XZ <ESC>
 
 " Clear the highlighting on strings that were searched
-nnoremap <leader>noh :noh<CR>
+nnoremap <leader>no :noh<CR>
 
 " Toggle on and off relative lines numbers.
 noremap <leader>rn :set relativenumber!<CR>
@@ -233,6 +236,9 @@ nnoremap <leader>vs :vsp<space>
 nnoremap <leader>ww :w<CR>
 nnoremap <leader>wa :wa<CR>
 nnoremap <leader>wq :wq<CR>
+
+" Shortcuts for formatting code using ClangFormat
+nnoremap <leader>fm :ClangFormat<CR>
 
 " Make it so that I don't have to press the colon key.
 "nnoremap <CR> :

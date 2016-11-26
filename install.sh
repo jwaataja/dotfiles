@@ -4,6 +4,7 @@ echo "First install vim, emacs, redshift, and zsh. This installs files for i3
 but it doesn't need to be installed."
 
 cp .emacs ~
+cp -r .emacs.d ~
 mkdir -p ~/.i3
 cp .i3/config ~/.i3
 cp .i3status.conf ~
