@@ -224,6 +224,8 @@ map <leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>gg :Git<space>
+nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>go :Git checkout<space>
 
 " For faster executing of shell commands.
 nnoremap <leader>ts :!<space>
