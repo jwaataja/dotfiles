@@ -21,6 +21,8 @@ Plugin 'romainl/Apprentice'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'sjl/badwolf'
 
+Plugin 'vim-syntastic/syntastic'
+
 "Syntax highlighting
 "For C, choose one of these.
 "Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -267,6 +269,18 @@ inoremap ii <Esc>
   "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   "execfile(activate_this, dict(__file__=activate_this))
 "EOF
+
+
+" For syntastic.
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 
 
