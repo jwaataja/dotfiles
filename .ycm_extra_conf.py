@@ -31,10 +31,8 @@
 import os
 import ycm_core
 
-# These are the compilation flags that will be used in case there's no
-# compilation database set (by default, one is not set).
-# CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
-flags = [
+
+cflags = [
 # THIS IS IMPORTANT! Without a "-std=<something>" flag, clang won't know which
 # language to use when compiling headers. So it will guess. Badly. So C++
 # headers will be compiled as C headers. You don't want that so ALWAYS specify
@@ -47,7 +45,28 @@ flags = [
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x',
-'c',
+'c'
+]
+
+
+cppflags = [
+# THIS IS IMPORTANT! Without a "-std=<something>" flag, clang won't know which
+# language to use when compiling headers. So it will guess. Badly. So C++
+# headers will be compiled as C headers. You don't want that so ALWAYS specify
+# a "-std=<something>".
+# For a C project, you would set this to something like 'c99' instead of
+# 'c++11'.
+'-std=gnu++11',
+# ...and the same thing goes for the magic -x option which specifies the
+# language that the files to be compiled are written in. This is mostly
+# relevant for c++ headers.
+# For a C project, you would set this to 'c' instead of 'c++'.
+'-x',
+'c++'
+]
+
+
+gtkflags = [
 '-I./include',
 '-I/usr/include/gtk-3.0',
 '-I/usr/include/at-spi2-atk/2.0',
@@ -73,8 +92,62 @@ flags = [
 '-I/usr/include/gdk-pixbuf-2.0',
 '-I/usr/include/libpng16',
 '-I/usr/include/glib-2.0',
-'-I/usr/lib/glib-2.0/include',
+'-I/usr/lib/glib-2.0/include'
 ]
+
+gtkmmflags = [
+'-pthread',
+'-I/usr/include/gtkmm-3.0',
+'-I/usr/lib64/gtkmm-3.0/include',
+'-I/usr/include/atkmm-1.6',
+'-I/usr/include/gtk-3.0/unix-print',
+'-I/usr/include/gdkmm-3.0',
+'-I/usr/lib64/gdkmm-3.0/include',
+'-I/usr/include/giomm-2.4',
+'-I/usr/lib64/giomm-2.4/include',
+'-I/usr/include/pangomm-1.4',
+'-I/usr/lib64/pangomm-1.4/include',
+'-I/usr/include/glibmm-2.4',
+'-I/usr/lib64/glibmm-2.4/include',
+'-I/usr/include/gtk-3.0',
+'-I/usr/include/at-spi2-atk/2.0',
+'-I/usr/include/at-spi-2.0',
+'-I/usr/include/dbus-1.0',
+'-I/usr/lib64/dbus-1.0/include',
+'-I/usr/include/gtk-3.0',
+'-I/usr/include/gio-unix-2.0/',
+'-I/usr/include/cairo',
+'-I/usr/include/pango-1.0',
+'-I/usr/include/harfbuzz',
+'-I/usr/include/pango-1.0',
+'-I/usr/include/atk-1.0',
+'-I/usr/include/cairo',
+'-I/usr/include/cairomm-1.0',
+'-I/usr/lib64/cairomm-1.0/include',
+'-I/usr/include/cairo',
+'-I/usr/include/pixman-1',
+'-I/usr/include/freetype2',
+'-I/usr/include/libdrm',
+'-I/usr/include/sigc++-2.0',
+'-I/usr/lib64/sigc++-2.0/include',
+'-I/usr/include/gdk-pixbuf-2.0',
+'-I/usr/include/libpng16',
+'-I/usr/include/glib-2.0',
+'-I/usr/lib64/glib-2.0/include'
+]
+
+
+# IMPORTANT: One of the following two lines is required.
+flags = cppflags
+
+# You can add gtk or gtkmm with the following.
+flags.extend(gtkmmflags)
+
+
+
+
+
+
 
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
