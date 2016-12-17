@@ -21,6 +21,10 @@ Plugin 'romainl/Apprentice'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'sjl/badwolf'
 
+" A status line.
+Plugin 'vim-airline/vim-airline'
+
+" Syntax checking, mainly for Python.
 Plugin 'vim-syntastic/syntastic'
 
 "Syntax highlighting
@@ -248,7 +252,7 @@ nnoremap <leader>fm :ClangFormat<CR>
 "nnoremap <CR> :
 
 " Easy escape.
-inoremap ii <Esc>
+" inoremap ii <Esc>
 
 
 
