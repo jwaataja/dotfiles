@@ -327,6 +327,12 @@ assign [class="UE4Editor"] 3
 assign [class="KeePass2"] 2
 assign [class="Keepassx2"] 2
 
+# For Gentoo, not Arch Linux
+# exec /usr/libexec/polkit-gnome-authentication-agent-1
+# For Arch Linux.
+# exec /usr/lib/polkit-gnome/
+# exec dropbox
+# exec pcmanfm -d
 #exec "dropbox start"
 #exec redshift-gtk
 #exec discord-canary
