@@ -51,6 +51,11 @@ Plugin 'hynek/vim-python-pep8-indent'
 " For formatting code
 Plugin 'rhysd/vim-clang-format'
 
+" Snippets.
+Plugin 'SirVer/ultisnips'
+" Extra snippets
+Plugin 'honza/vim-snippets'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -232,11 +237,14 @@ nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>gg :Git<space>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>go :Git checkout<space>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gd :Gdiff<CR>
 
 " For faster executing of shell commands.
 nnoremap <leader>ts :!<space>
 
 " For opening stuff faster.
+nnoremap <leader>ne :e<space>
 nnoremap <leader>te :tabe<space>
 nnoremap <leader>vs :vsp<space>
 
@@ -285,6 +293,39 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Syntastic python settings.
+"
+" Use flake8 for checking, pylint makes me write docstrings.
+let g:syntastic_python_checkers = ['python', 'flake8']
+
+
+
+
+
+" Snippets settings
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-e>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" Create new snippets in the directory I want and not in the current directory,
+" which I think is really dumb.
+
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+
+
+
+
+
+
 
 
 
