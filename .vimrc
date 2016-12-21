@@ -56,6 +56,9 @@ Plugin 'SirVer/ultisnips'
 " Extra snippets
 Plugin 'honza/vim-snippets'
 
+" Fuzzy finding.
+Plugin 'ctrlpvim/ctrlp.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -241,7 +244,7 @@ nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gd :Gdiff<CR>
 
 " For faster executing of shell commands.
-nnoremap <leader>ts :!<space>
+nnoremap <leader>ts :!
 
 " For opening stuff faster.
 nnoremap <leader>ne :e<space>
