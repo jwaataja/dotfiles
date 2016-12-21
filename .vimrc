@@ -244,7 +244,7 @@ nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gd :Gdiff<CR>
 
 " For faster executing of shell commands.
-nnoremap <leader>ts :!<space>
+nnoremap <leader>ts :!
 
 " For opening stuff faster.
 nnoremap <leader>ne :e<space>
