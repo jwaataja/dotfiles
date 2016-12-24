@@ -83,8 +83,8 @@
 (require 'git)
 
 ;; Make it so that windows size *aesthetically*.
-(require 'golden-ratio)
-(golden-ratio-mode 1)
+;; (require 'golden-ratio)
+;; (golden-ratio-mode 1)
 
 ;; Highlight trailing whitespace.
 (require 'whitespace)
