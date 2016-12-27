@@ -251,6 +251,12 @@ nnoremap <leader>ne :e<space>
 nnoremap <leader>te :tabe<space>
 nnoremap <leader>vs :vsp<space>
 
+" For quitting stuff faster.
+nnoremap <leader>qq :q<CR>
+nnoremap <leader>qn :q!<CR>
+nnoremap <leader>qa :qa<CR>
+nnoremap <leader>qt :qa!<CR>
+
 " For saving stuff faster.
 nnoremap <leader>ww :w<CR>
 nnoremap <leader>wa :wa<CR>
