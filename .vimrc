@@ -30,7 +30,7 @@ Plugin 'vim-syntastic/syntastic'
 "Syntax highlighting
 "For C, choose one of these.
 "Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'justinmk/vim-syntax-extra'
+" Plugin 'justinmk/vim-syntax-extra'
 
 " For git and compiling.
 Plugin 'tpope/vim-fugitive'
