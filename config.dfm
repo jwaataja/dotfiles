@@ -9,11 +9,11 @@ install:
 	sh
 		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-emacs
+emacs:
 	.emacs
 	.emacs.d
 
-i3
+i3:
 	.i3
 	.i3status.conf
 install:
