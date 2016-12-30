@@ -107,7 +107,7 @@ set cursorline
 
 set incsearch "search as characters are entered
 " Highlight matches.
-set hlsearch 
+set hlsearch
 
 " Cursor can't be on the top or bottom line.
 set scrolloff=5
