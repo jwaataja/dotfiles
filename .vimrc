@@ -59,6 +59,9 @@ Plugin 'honza/vim-snippets'
 " Fuzzy finding.
 Plugin 'ctrlpvim/ctrlp.vim'
 
+" Physics based scrolling
+Plugin 'yuttie/comfortable-motion.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
