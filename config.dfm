@@ -24,7 +24,7 @@ update:
 	msg "Please reload i3"
 
 redshift:
-	.config/redshift.conf ~/.config
+	.config/redshift.conf
 
 jws:
 	.jws

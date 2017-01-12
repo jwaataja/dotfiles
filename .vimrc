@@ -48,6 +48,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'nvie/vim-flake8'
 Plugin 'hynek/vim-python-pep8-indent'
 
+" Go Programming
+Plugin 'fatih/vim-go'
+
 " For formatting code
 Plugin 'rhysd/vim-clang-format'
 
@@ -58,6 +61,9 @@ Plugin 'honza/vim-snippets'
 
 " Fuzzy finding.
 Plugin 'ctrlpvim/ctrlp.vim'
+
+" Tagbar for C, C++, and Go.
+Plugin 'majutsushi/tagbar'
 
 " Physics based scrolling
 Plugin 'yuttie/comfortable-motion.vim'
@@ -264,6 +270,11 @@ nnoremap <leader>qt :qa!<CR>
 nnoremap <leader>ww :w<CR>
 nnoremap <leader>wa :wa<CR>
 nnoremap <leader>wq :wq<CR>
+
+" For use with vim-go
+nnoremap <leader>lb :GoBuild<CR>
+nnoremap <leader>lr :GoRun<CR>
+nnoremap <leader>li :GoInstall<CR>
 
 " Shortcuts for formatting code using ClangFormat
 nnoremap <leader>fm :ClangFormat<CR>
