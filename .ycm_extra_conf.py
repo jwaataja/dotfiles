@@ -113,6 +113,9 @@ gtkmmflags = [
 '-I/usr/lib64/glib-2.0/include'
 ]
 
+vte_flags = [
+    "-pthread",
+    "-I/usr/include/vte-2.91"].extend(gtkflags)
 
 # IMPORTANT: One of the following two lines is required.
 flags = cppflags
