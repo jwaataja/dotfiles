@@ -23,13 +23,14 @@ Plugin 'sjl/badwolf'
 
 " A status line.
 Plugin 'vim-airline/vim-airline'
+" Plugin 'powerline/powerline'
 
 " Syntax checking, mainly for Python.
 Plugin 'vim-syntastic/syntastic'
 
 "Syntax highlighting
 "For C, choose one of these.
-"Plugin 'octol/vim-cpp-enhanced-highlight'
+" Plugin 'octol/vim-cpp-enhanced-highlight'
 " Plugin 'justinmk/vim-syntax-extra'
 
 " For git and compiling.
@@ -42,6 +43,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-commentary'
 
+" Completion for programming in various languages.
 Plugin 'Valloric/YouCompleteMe'
 
 " For Python programming.
@@ -50,6 +52,9 @@ Plugin 'hynek/vim-python-pep8-indent'
 
 " Go Programming
 Plugin 'fatih/vim-go'
+
+" Rust Programming
+Plugin 'rust-lang/rust.vim'
 
 " For formatting code
 Plugin 'rhysd/vim-clang-format'
@@ -137,9 +142,10 @@ set mouse=a
 
 
 
-"Using zero makes it a maximum of 79, which is what I want.
+" Wrap columns at 80 by default, disable this on a filetype basis.
 set textwidth=80
 
+" Highlight the 80th column so it is not crossed.
 set colorcolumn=80
 
 " For making tab completion better
@@ -147,7 +153,7 @@ set switchbuf=useopen,usetab,newtab
 
 " This is for Gentoo. YouCompleteMe didn't work without it but other systems
 " shouldn't need this.
-"let g:ycm_server_python_interpreter="/usr/bin/python2.7"
+" let g:ycm_server_python_interpreter="/usr/bin/python2.7"
 
 " Disables autocommenting.
 "autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -168,8 +174,10 @@ set backspace=indent,eol,start
 " Display whitespace chars as certain characters. Delete this stuff if you don't
 " want those annoying characters for spaces.
 "set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
-set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
-set list
+" set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
+" set list
+
+let g:rustfmt_autosave = 1
 
 
 
@@ -177,11 +185,11 @@ set list
 
 "set termguicolors
 
-"Enable italics in terminal.
+" Enable italics in terminal.
 let g:gruvbox_italic=1
-"Get rid ot that annoying bold gruvbox stuff.
+" Get rid ot that annoying bold gruvbox stuff.
 let g:gruvbox_bold=0
-"Other gruvbox stuff.
+" Other gruvbox stuff.
 let g:gruvbox_underline=1
 let g:gruvbox_undercurl=1
 
@@ -194,22 +202,21 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgree
 match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 
 " Colors
-"colorscheme hybrid
-"colorscheme solarized
+" colorscheme hybrid
+" colorscheme solarized
 colorscheme gruvbox
 set background=dark
-"colorscheme whiplash
 
 
 
 
 
 " Fonts
-"set guifont=DejaVu\ Sans\ Mono\ 11
+" set guifont=DejaVu\ Sans\ Mono\ 11
 set guifont=Source\ Code\ Pro\ 10
 
 " Use this font for Windows. It might not work on other systems, though.
-"set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
+" set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
 
 
 
@@ -227,9 +234,9 @@ let mapleader=","
 noremap <F4> :Make<CR>
 
 " These are in case you want to exit insert mode faster.
-"inoremap xx <ESC>
-"inoremap xz <ESC>
-"inoremap XZ <ESC>
+" inoremap xx <ESC>
+" inoremap xz <ESC>
+" inoremap XZ <ESC>
 
 " Clear the highlighting on strings that were searched
 nnoremap <leader>no :noh<CR>
@@ -271,6 +278,9 @@ nnoremap <leader>ww :w<CR>
 nnoremap <leader>wa :wa<CR>
 nnoremap <leader>wq :wq<CR>
 
+" For turning off automatic wrapping in current buffer
+nnoremap <leader>tw :set textwidth=0<CR>
+
 " For use with vim-go
 nnoremap <leader>lb :GoBuild<CR>
 nnoremap <leader>lr :GoRun<CR>
@@ -280,7 +290,7 @@ nnoremap <leader>li :GoInstall<CR>
 nnoremap <leader>fm :ClangFormat<CR>
 
 " Make it so that I don't have to press the colon key.
-"nnoremap <CR> :
+" nnoremap <CR> :
 
 " Easy escape.
 " inoremap ii <Esc>
@@ -307,7 +317,6 @@ nnoremap <leader>fm :ClangFormat<CR>
 
 
 " For syntastic.
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -321,6 +330,9 @@ let g:syntastic_check_on_wq = 0
 "
 " Use flake8 for checking, pylint makes me write docstrings.
 let g:syntastic_python_checkers = ['python', 'flake8']
+
+" For rust syntax checking.
+let g:syntastic_rust_checkers = ['rustc']
 
 
 

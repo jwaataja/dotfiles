@@ -3,6 +3,7 @@ vim:
 	c.vim ~/.vim/after/ftplugin
 	cpp.vim ~/.vim/after/ftplugin
 	python.vim ~/.vim/after/ftplugin
+	go.vim ~/.vim/after/ftplugin
 	.ycm_extra_conf.py
 install:
 	dep vim git
