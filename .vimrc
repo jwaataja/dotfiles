@@ -26,15 +26,18 @@ Plugin 'vim-airline/vim-airline'
 " Plugin 'powerline/powerline'
 
 " Syntax checking, mainly for Python.
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
+Plugin 'neomake/neomake'
 
 "Syntax highlighting
 "For C, choose one of these.
 " Plugin 'octol/vim-cpp-enhanced-highlight'
 " Plugin 'justinmk/vim-syntax-extra'
+Plugin 'jaxbot/semantic-highlight.vim'
 
 " For git and compiling.
 Plugin 'tpope/vim-fugitive'
+Plugin 'idanarye/vim-merginal'
 Plugin 'tpope/vim-dispatch'
 
 "Plugin 'roman/golden-ratio'
@@ -44,7 +47,11 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-commentary'
 
 " Completion for programming in various languages.
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'justmao945/vim-clang'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Rip-Rip/clang_complete'
+Plugin 'davidhalter/jedi-vim'
 
 " For Python programming.
 Plugin 'nvie/vim-flake8'
@@ -66,6 +73,9 @@ Plugin 'honza/vim-snippets'
 
 " Fuzzy finding.
 Plugin 'ctrlpvim/ctrlp.vim'
+
+" For taking notes and stuff.
+Plugin 'vimoutliner/vimoutliner'
 
 " Tagbar for C, C++, and Go.
 Plugin 'majutsushi/tagbar'
@@ -122,6 +132,10 @@ set cursorline
 set incsearch "search as characters are entered
 " Highlight matches.
 set hlsearch
+
+" Auto read changed files without unsaved changes. This is for use with git and
+" the command :Git checkout.
+set autoread
 
 " Cursor can't be on the top or bottom line.
 set scrolloff=5
@@ -183,7 +197,7 @@ let g:rustfmt_autosave = 1
 
 
 
-"set termguicolors
+" set termguicolors
 
 " Enable italics in terminal.
 let g:gruvbox_italic=1
@@ -202,6 +216,7 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgree
 match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 
 " Colors
+" colorscheme default
 " colorscheme hybrid
 " colorscheme solarized
 colorscheme gruvbox
@@ -214,6 +229,7 @@ set background=dark
 " Fonts
 " set guifont=DejaVu\ Sans\ Mono\ 11
 set guifont=Source\ Code\ Pro\ 10
+" set guifont=Inconsolata\ 11
 
 " Use this font for Windows. It might not work on other systems, though.
 " set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
@@ -285,6 +301,7 @@ nnoremap <leader>tw :set textwidth=0<CR>
 nnoremap <leader>lb :GoBuild<CR>
 nnoremap <leader>lr :GoRun<CR>
 nnoremap <leader>li :GoInstall<CR>
+nnoremap <leader>lf :GoFmt<CR>
 
 " Shortcuts for formatting code using ClangFormat
 nnoremap <leader>fm :ClangFormat<CR>
@@ -295,6 +312,105 @@ nnoremap <leader>fm :ClangFormat<CR>
 " Easy escape.
 " inoremap ii <Esc>
 
+" For activating C++ completion thing.
+inoremap <C-Z> <C-X><C-O>
+
+
+
+
+
+" Neomake stuff
+let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_cpp_clang_maker = {
+   \ 'exe': 'clang++',
+   \ 'args': ['-Wall', '-Wextra', '-std=gnu++11'],
+   \ }
+let g:neomake_c_enabled_makers = ['clang']
+let g:neomake_c_clang_maker = {
+   \ 'exe': 'clang',
+   \ 'args': ['-Wall', '-Wextra', '-std=gnu11'],
+   \ }
+" let g:neomake_python_flake8_maker = {
+"    \ 'exe': 'flake8',
+"    \ }
+" let g:neomake_cpp_enabled_makers = ['clang']
+" let g:neomake_cpp_clang_maker = {
+"    \ 'exe': 'clang++',
+"    \ 'args': ['-Wall', '-Wextra', '-Weverything', '-Wno-sign-conversion', '-std=gnu++11'],
+"    \ }
+
+autocmd! BufWritePost * Neomake
+
+
+
+
+
+" Open tagbar in these files to see an outline. I used to include C and C++ here
+" but turned those off because I almost always have a split window with those
+" types for headers.
+autocmd FileType go TagbarOpen
+" autocmd FileType c TagbarOpen
+" autocmd FileType cpp TagbarOpen
+autocmd FileType python TagbarOpen
+autocmd FileType lisp TagbarOpen
+
+
+
+
+
+" Neocomplete stuff
+"
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+" let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 
 
@@ -303,6 +419,25 @@ nnoremap <leader>fm :ClangFormat<CR>
 
 
 
+
+" Enable omni completion.
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 " Python stuff
 
 "python with virtualenv support
@@ -314,6 +449,13 @@ nnoremap <leader>fm :ClangFormat<CR>
   "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   "execfile(activate_this, dict(__file__=activate_this))
 "EOF
+
+
+
+
+
+
+
 
 
 " For syntastic.
@@ -331,8 +473,19 @@ let g:syntastic_check_on_wq = 0
 " Use flake8 for checking, pylint makes me write docstrings.
 let g:syntastic_python_checkers = ['python', 'flake8']
 
+" let g:syntastic_cpp_checkers = ['clang_check', 'gcc']
+" let g:syntastic_cpp_checkers = ['gcc']
+" let g:syntastic_cpp_clang_check_args = "-std=gnu++11"
+" let g:syntastic_cpp_compiler = 'clang++'
+" let g:syntastic_cpp_compiler_options = '-std=c++11'
+" let g:syntastic_cpp_gcc_args = "-std=c++11"
+let g:syntastic_mode_map = { 'passive_filetypes': ['cpp', 'c'] }
+
 " For rust syntax checking.
 let g:syntastic_rust_checkers = ['rustc']
+
+let g:clang_c_options = '-std=gnu11'
+let g:clang_cpp_options = '-std=gnu++11 -pthread -I/usr/include/gtkmm-3.0 -I/usr/lib64/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib64/gdkmm-3.0/include -I/usr/include/giomm-2.4 -I/usr/lib64/giomm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/lib64/pangomm-1.4/include -I/usr/include/glibmm-2.4 -I/usr/lib64/glibmm-2.4/include -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/cairomm-1.0 -I/usr/lib64/cairomm-1.0/include -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/sigc++-2.0 -I/usr/lib64/sigc++-2.0/include -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include'
 
 
 
