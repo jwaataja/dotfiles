@@ -10,6 +10,12 @@ install:
 	sh
 		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+neovim:
+	.nvimrc
+	.config/nvim/init.vim
+install:
+	msg "Please open vim and run 'PlugInstall'"
+
 emacs:
 	.emacs
 	.emacs.d

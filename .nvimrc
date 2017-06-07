@@ -348,6 +348,12 @@ augroup end
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+" clang_complete
+" path to directory where library can be found
+let g:clang_library_path='/usr/lib/llvm/4/lib64'
+" or path directly to the library file
+" let g:clang_library_path='/usr/lib64/libclang.so.3.8'
+
 
 
 
