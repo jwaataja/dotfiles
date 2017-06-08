@@ -14,7 +14,12 @@ neovim:
 	.nvimrc
 	.config/nvim/init.vim
 install:
+	sh
+		curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	msg "Please open vim and run 'PlugInstall'"
+
+miniterm:
+	.config/miniterm/miniterm.conf
 
 emacs:
 	.emacs
