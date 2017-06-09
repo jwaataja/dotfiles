@@ -86,6 +86,9 @@
                             (setq whitespace-line-column 100)
                             (setq-default indent-tabs-mode nil)))
 
+;; So that Emacs doesn't hang on exit.
+(setq x-select-enable-clipboard-manager nil)
+
 
 
 
