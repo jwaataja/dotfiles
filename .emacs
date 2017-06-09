@@ -1,5 +1,3 @@
-
-
 (setq package-enable-at-startup nil)
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -28,10 +26,6 @@
 
 
 
-
-
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -54,33 +48,16 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Source Code Pro" :foundry "ADBO" :slant normal :weight normal :height 103 :width normal)))))
 
-
-
-
-
-
-
-
-
-
-;; Set your lisp system and, optionally, some contribs
-(setq inferior-lisp-program "/usr/bin/sbcl")
-(setq slime-contribs '(slime-fancy))
-;; Make it so that it recognizes cl files as Common Lisp.
-(add-to-list 'auto-mode-alist '("\\.cl\\'" . lisp-mode))
-
-
-
-
-
-
-
-
-
-;; Other plugin stuff.
+;;; Plugins that REQUIRE stuff
 
 ;; Git stuff.
 (require 'git)
+
+;;; Stuff for including indentation and other lisp files.
+(add-to-list 'load-path "~/.emacs.d/elisp")
+
+(require 'openbsd-knf-style)
+(c-add-style "OpenBSD" openbsd-knf-style)
 
 ;; Make it so that windows size *aesthetically*.
 ;; (require 'golden-ratio)
@@ -89,7 +66,7 @@
 ;; Highlight trailing whitespace.
 (require 'whitespace)
 (setq whitespace-line-column 80) ;; limit line length
-(setq whitespace-style '(face lines-tail))
+;; (setq whitespace-style '(face lines-tail))
 
 ;; (add-hook 'prog-mode-hook 'whitespace-mode)
 (global-whitespace-mode +1)
@@ -97,6 +74,17 @@
 
 
 
+
+
+;;; Extra commands, such as stuff to do with languages.
+;; Set your lisp system and, optionally, some contribs
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(setq slime-contribs '(slime-fancy))
+;; Make it so that it recognizes cl files as Common Lisp.
+(add-to-list 'auto-mode-alist '("\\.cl\\'" . lisp-mode))
+(add-hook 'lisp-mode-hook (lambda ()
+                            (setq whitespace-line-column 100)
+                            (setq-default indent-tabs-mode nil)))
 
 
 
@@ -134,10 +122,6 @@
 
 ;; (add-hook 'c-mode-common-hook 'des-c-mode-hook)
 
-(add-to-list 'load-path "~/.emacs.d/elisp")
-
-(require 'openbsd-knf-style)
-(c-add-style "OpenBSD" openbsd-knf-style)
 ;; (setq c-default-style '((c-mode . "OpenBSD")))
 ;; (setq c-default-style '((c-mode . "k&r")))
 ;; (setq c-default-style '((c++-mode . "k&r")))
