@@ -85,6 +85,9 @@
 (add-hook 'lisp-mode-hook (lambda ()
                             (setq whitespace-line-column 100)
                             (setq-default indent-tabs-mode nil)))
+;; For looking up stuff in the hyperspec without the internet. Default set to
+;; where the Gentoo package installs the hyperspec installs to.
+;; (setq common-lisp-hyperspec-root "/usr/share/doc/hyperspec/HyperSpec/")
 
 ;; So that Emacs doesn't hang on exit.
 (setq x-select-enable-clipboard-manager nil)
