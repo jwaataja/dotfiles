@@ -332,7 +332,7 @@ assign [class="Keepassx2"] 2
 # Screen saver.
 # exec xscreensaver -nosplash
 # For an input manager. It doesn't completely work when this is in ~/.xprofile.
-# ibus-daemon -drx
+# exec ibus-daemon -drx
 # For Arch Linux.
 # exec /usr/lib/polkit-gnome/
 # exec dropbox
