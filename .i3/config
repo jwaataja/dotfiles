@@ -329,6 +329,10 @@ assign [class="Keepassx2"] 2
 
 # For Gentoo, not Arch Linux
 # exec /usr/libexec/polkit-gnome-authentication-agent-1
+# Screen saver.
+# exec xscreensaver -nosplash
+# For an input manager. It doesn't completely work when this is in ~/.xprofile.
+# ibus-daemon -drx
 # For Arch Linux.
 # exec /usr/lib/polkit-gnome/
 # exec dropbox

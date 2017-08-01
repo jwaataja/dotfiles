@@ -50,3 +50,4 @@ install:
 
 X:
 	.Xresources
+	.xprofile
