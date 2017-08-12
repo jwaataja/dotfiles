@@ -1,6 +1,16 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/jason/.oh-my-zsh
 
+# Various programming languages and more.
+export PATH=$PATH:$HOME/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.4.0/bin
+# For eclipse
+export PATH=$PATH:$HOME/eclipse/java-neon/eclipse
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each

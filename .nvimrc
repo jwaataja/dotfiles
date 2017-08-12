@@ -58,8 +58,13 @@ Plug 'hynek/vim-python-pep8-indent'
 " Go Programming
 Plug 'fatih/vim-go'
 
+" Ruby Programming
+Plug 'vim-ruby/vim-ruby'
+
 " Rust Programming
 Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'sebastianmarkow/deoplete-rust'
 
 " For formatting code
 Plug 'rhysd/vim-clang-format'
@@ -348,11 +353,25 @@ augroup end
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+call deoplete#custom#set("buffer", "rank", 1)
+call deoplete#custom#set("member", "rank", 1)
+call deoplete#custom#set("tag", "rank", 1)
+call deoplete#custom#set("file", "rank", 1)
+call deoplete#custom#set("dictionary", "rank", 1)
+call deoplete#custom#set("around", "rank", 1)
+
 " clang_complete
 " path to directory where library can be found
 let g:clang_library_path='/usr/lib/llvm/4/lib64'
 " or path directly to the library file
 " let g:clang_library_path='/usr/lib64/libclang.so.3.8'
+
+" Rust
+let g:rustfmt_autosave = 1
+let g:racer_cmd = '/home/jason/.cargo/bin/racer'
+let g:racer_experimental_completer = 1
+" let g:deoplete#sources#rust#racer_binary = '/home/jason/.cargo/bin/racer'
+" let g:deoplete#sources#rust#rust_source_path = '/home/jason/git/rust/src'
 
 
 
