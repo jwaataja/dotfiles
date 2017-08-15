@@ -60,6 +60,7 @@ Plug 'fatih/vim-go'
 
 " Ruby Programming
 Plug 'vim-ruby/vim-ruby'
+Plug 'fishbullet/deoplete-ruby'
 
 " Rust Programming
 Plug 'rust-lang/rust.vim'
