@@ -35,6 +35,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'idanarye/vim-merginal'
 Plug 'tpope/vim-dispatch'
 
+" ctags
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+
 " Plug 'roman/golden-ratio'
 
 " For easy comment management.
@@ -59,7 +63,10 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'fatih/vim-go'
 
 " Ruby Programming
+" I'm not sure if I'm supposed to have both installed.
 Plug 'vim-ruby/vim-ruby'
+Plug 'fishbullet/deoplete-ruby'
+Plug 'tpope/vim-rails'
 
 " Rust Programming
 Plug 'rust-lang/rust.vim'
@@ -352,6 +359,17 @@ augroup omnifuncs
 augroup end
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" No idea what this stuff does but it helps with ruby completion.
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.ruby =
+			\ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.ruby = 'rubycomplete#Complete'
 
 call deoplete#custom#set("buffer", "rank", 1)
 call deoplete#custom#set("member", "rank", 1)
