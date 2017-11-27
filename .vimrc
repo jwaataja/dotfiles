@@ -190,6 +190,8 @@ set backspace=indent,eol,start
 "set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
 " set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
 " set list
+"
+let g:netrw_winsize = 25
 
 let g:rustfmt_autosave = 1
 
