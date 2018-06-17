@@ -37,7 +37,7 @@ Plug 'tpope/vim-dispatch'
 
 " ctags
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+" Plug 'xolox/vim-easytags'
 
 " Plug 'roman/golden-ratio'
 
@@ -58,9 +58,11 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " For Python programming.
 Plug 'nvie/vim-flake8'
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'tell-k/vim-autopep8'
 
 " Go Programming
 Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " Ruby Programming
 " I'm not sure if I'm supposed to have both installed.
@@ -73,8 +75,15 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'sebastianmarkow/deoplete-rust'
 
+" Java programming
+Plug 'artur-shaik/vim-javacomplete2'
+
 " For formatting code
 Plug 'rhysd/vim-clang-format'
+Plug 'Chiel92/vim-autoformat'
+
+" LaTeX
+Plug 'vim-latex/vim-latex'
 
 " Snippets.
 Plug 'SirVer/ultisnips'
@@ -150,6 +159,11 @@ set laststatus=2
 " For mouse.
 set mouse=a
 
+" To make searching ignore case unless a non-lower case letter is searched for,
+" like emacs.
+set ignorecase
+set smartcase
+
 
 
 
@@ -183,7 +197,15 @@ set shiftwidth=4
 set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
 set list
 
-let g:rustfmt_autosave = 1
+
+
+
+
+" Netrw
+" Make the window smaller.
+let g:netrw_winsize = 25
+" Tree listing by default
+let g:netrw_liststyle = 3
 
 
 
@@ -356,6 +378,7 @@ augroup omnifuncs
 	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 	" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+	autocmd FileType xml let g:deoplete#disable_auto_complete = 1
 augroup end
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -380,9 +403,12 @@ call deoplete#custom#set("around", "rank", 1)
 
 " clang_complete
 " path to directory where library can be found
-let g:clang_library_path='/usr/lib/llvm/4/lib64'
+let g:clang_library_path='/usr/lib/llvm/6/lib64'
 " or path directly to the library file
 " let g:clang_library_path='/usr/lib64/libclang.so.3.8'
+" Turn on the ch extended c mode for .h files instead of c or c++. Used C++ by
+" default.
+let ch_syntax_for_h = 1
 
 " Rust
 let g:rustfmt_autosave = 1
@@ -391,16 +417,23 @@ let g:racer_experimental_completer = 1
 " let g:deoplete#sources#rust#racer_binary = '/home/jason/.cargo/bin/racer'
 " let g:deoplete#sources#rust#rust_source_path = '/home/jason/git/rust/src'
 
+" LaTeX
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat='pdf'
 
 
 
 
 
-autocmd FileType go TagbarOpen
+
+" autocmd FileType go TagbarOpen
 " autocmd FileType c TagbarOpen
 " autocmd FileType cpp TagbarOpen
-autocmd FileType python TagbarOpen
-autocmd FileType lisp TagbarOpen
+" autocmd FileType python TagbarOpen
+" autocmd FileType lisp TagbarOpen
 
 
 
@@ -416,6 +449,9 @@ autocmd FileType lisp TagbarOpen
 
 
 " Python stuff
+
+autocmd BufWrite *.py Autopep8
+let g:autopep8_disable_show_diff=1
 
 "python with virtualenv support
 "py << EOF
