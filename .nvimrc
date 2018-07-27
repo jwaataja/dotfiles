@@ -53,7 +53,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Rip-Rip/clang_complete'
 " Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " For Python programming.
 Plug 'nvie/vim-flake8'
@@ -165,9 +164,6 @@ set ignorecase
 set smartcase
 
 
-
-
-
 " Wrap columns at 80 by default, disable this on a filetype basis.
 set textwidth=80
 
@@ -195,10 +191,7 @@ set shiftwidth=4
 " want those annoying characters for spaces.
 "set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
 set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
-set list
-
-
-
+" set list
 
 
 " Netrw
@@ -208,9 +201,7 @@ let g:netrw_winsize = 25
 let g:netrw_liststyle = 3
 
 
-
-
-
+" For truecolor support.
 set termguicolors
 
 " Enable italics in terminal.
@@ -220,6 +211,9 @@ let g:gruvbox_bold=0
 " Other gruvbox stuff.
 let g:gruvbox_underline=1
 let g:gruvbox_undercurl=1
+" Set the contrast to be lower.
+let g:gruvbox_contrast_dark = "soft"
+let g:gruvbox_contrast_light = "soft"
 
 " Highlight trailing whitespace.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -237,9 +231,6 @@ set background=dark
 colorscheme gruvbox
 
 
-
-
-
 " Fonts
 " set guifont=DejaVu\ Sans\ Mono\ 11
 set guifont=Source\ Code\ Pro\ 10
@@ -252,6 +243,43 @@ set guifont=Source\ Code\ Pro\ 10
 
 
 
+" Specially defined and custom functions.
+
+" Splits the current query so that it matches based on tokens.
+function! SplitSearch()
+    let query = join(split(@/), '\_s\+')
+    let @/ = query
+endfunction
+
+" Sets the current indentation settings to given amount.
+function! SetIndentation(count)
+    let &shiftwidth = a:count
+    let &tabstop = a:count
+    let &softtabstop = a:count
+endfunction
+
+" Toggles between using four and two spaces for indentation. If neither is
+" currently in use, sets it to four.
+function! ToggleIndentation()
+    if &shiftwidth == 4
+        call SetIndentation(2)
+    else
+        call SetIndentation(4)
+    endif
+endfunction
+
+" Toggles between using 80 and 100 as the textwidth. If neither is currently in
+" use, sets it to 80
+function! ToggleTextWidth()
+    if &textwidth == 80
+        set textwidth=100
+        set colorcolumn=100
+    else
+        set textwidth=80
+        set colorcolumn=80
+    endif
+endfunction
+
 
 
 
@@ -259,6 +287,10 @@ set guifont=Source\ Code\ Pro\ 10
 " Key bindings and whatnot.
 
 let mapleader=","
+
+" Edit configuration faster.
+nnoremap <leader>ev :vsplit ~/.nvimrc<cr>
+nnoremap <leader>sv :source ~/.nvimrc<cr>
 
 " Runs a build process using vim-dispatch.
 noremap <F4> :Make<CR>
@@ -331,6 +363,17 @@ inoremap <C-Z> <C-X><C-O>
 " Easy escape.
 " inoremap ii <Esc>
 
+" Make it so that double tapping the '/' character converts the search.
+nnoremap <silent> <c-s> :call SplitSearch()<cr>n
+
+" Toggle between two and four spaces, mostly for Java.
+nnoremap <silent> <leader>ti :call ToggleIndentation()<cr>
+
+" Toggle between 80 and 100 spaces.
+nnoremap <silent> <leader>tt :call ToggleTextWidth()<cr>
+
+" Run ctags in the current directory.
+nnoremap <leader>ct :!ctags -R .<cr>
 
 
 
@@ -357,14 +400,13 @@ let g:neomake_c_clang_maker = {
 "    \ }
 
 
-
-
-
 " Completion
 let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources._ = ['buffer', 'around']
+" if !exists('g:deoplete#omni#input_patterns')
+"   let g:deoplete#omni#input_patterns = {}
+" endif
 " This would prevent the screen from cluttering with text.
 " let g:deoplete#disable_auto_complete = 1
 " Close the preview window when finished.
@@ -372,13 +414,14 @@ endif
 autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
 " omnifuncs
 augroup omnifuncs
-	autocmd!
-	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-	autocmd FileType xml let g:deoplete#disable_auto_complete = 1
+    autocmd!
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType xml let g:deoplete#disable_auto_complete = 1
+    autocmd FileType java setlocal omnifunc=javacomplete#Complete
 augroup end
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -394,12 +437,6 @@ let g:deoplete#omni#input_patterns.ruby =
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.ruby = 'rubycomplete#Complete'
 
-call deoplete#custom#set("buffer", "rank", 1)
-call deoplete#custom#set("member", "rank", 1)
-call deoplete#custom#set("tag", "rank", 1)
-call deoplete#custom#set("file", "rank", 1)
-call deoplete#custom#set("dictionary", "rank", 1)
-call deoplete#custom#set("around", "rank", 1)
 
 " clang_complete
 " path to directory where library can be found
@@ -425,29 +462,6 @@ let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 
 
-
-
-
-
-" autocmd FileType go TagbarOpen
-" autocmd FileType c TagbarOpen
-" autocmd FileType cpp TagbarOpen
-" autocmd FileType python TagbarOpen
-" autocmd FileType lisp TagbarOpen
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 " Python stuff
 
 autocmd BufWrite *.py Autopep8
@@ -462,14 +476,6 @@ let g:autopep8_disable_show_diff=1
   "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   "execfile(activate_this, dict(__file__=activate_this))
 "EOF
-
-
-
-
-
-
-
-
 
 
 " Snippets settings
@@ -489,19 +495,6 @@ let g:UltiSnipsEditSplit="vertical"
 " which I think is really dumb.
 
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 " Filetype specific stuff

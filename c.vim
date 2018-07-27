@@ -1,10 +1,11 @@
 setlocal cindent
-setlocal cinoptions=>8,:0,=8,+4,t0,(4
+" setlocal cinoptions=>8,:0,=8,+4,t0,(4
+setlocal cinoptions=>8,:0,=8,t0,(8
 
 setlocal formatoptions=cqtr
 setlocal tabstop=8
 setlocal softtabstop=8
-setlocal shiftwidth=4
+setlocal shiftwidth=8
 setlocal textwidth=79
 setlocal smarttab
 
@@ -22,6 +23,7 @@ setlocal smarttab
 "setlocal fo+=cqt
 "setlocal fo+=qt
 "setlocal fo+=t
-" This is what it was before but I removed l because it meant that text comments
-" weren't automatically broken while I was typing.
-"setlocal fo-=ro fo+=cql
+"setlocal expandtab
+"" This is what it was before but I removed l because it meant that text comments
+"" weren't automatically broken while I was typing.
+""setlocal fo-=ro fo+=cql
