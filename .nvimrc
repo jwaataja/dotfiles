@@ -6,7 +6,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Colors
 " Plug 'altercation/vim-colors-solarized'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/candycode.vim'
 Plug 'w0ng/vim-hybrid'
@@ -17,7 +17,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'sjl/badwolf'
 
 " A status line.
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 " Plug 'powerline/powerline'
 
 " Syntax checking, mainly for Python.
@@ -375,6 +375,11 @@ nnoremap <silent> <leader>tt :call ToggleTextWidth()<cr>
 " Run ctags in the current directory.
 nnoremap <leader>ct :!ctags -R .<cr>
 
+" Delete all trailing whitespace in the current file. Stands for "delete
+" trailing whitespace".
+" TODO: "g" necessary here?
+nnoremap <leader>dt :%s/\s\+$//g<cr>``
+
 
 
 
@@ -383,7 +388,8 @@ autocmd! BufWritePost * Neomake
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_maker = {
    \ 'exe': 'clang++',
-   \ 'args': ['-Wall', '-Wextra', '-std=gnu++11'],
+   \ 'args': ['-Wall', '-Wextra', '-std=gnu++11',
+   \'`pkg-config --cflags libxml++-3.0`'],
    \ }
 let g:neomake_c_enabled_makers = ['clang']
 let g:neomake_c_clang_maker = {
@@ -425,17 +431,6 @@ augroup omnifuncs
 augroup end
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" No idea what this stuff does but it helps with ruby completion.
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.ruby =
-			\ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.ruby = 'rubycomplete#Complete'
 
 
 " clang_complete
