@@ -1,6 +1,17 @@
+" My regular settings
+
 setlocal cindent
-" setlocal cinoptions=>8,:0,=8,+4,t0,(4
-setlocal cinoptions=>8,:0,=8,t0,(8
+
+
+
+" What it is usually.
+setlocal cinoptions=>s,:0,=s,t0,(s
+
+
+
+" Miniterm
+" setlocal cinoptions=>s,:0,=s,t0,+0.5s,(0.5s
+" setlocal noexpandtab
 
 setlocal formatoptions=cqtr
 setlocal tabstop=8
@@ -8,6 +19,7 @@ setlocal softtabstop=8
 setlocal shiftwidth=8
 setlocal textwidth=79
 setlocal smarttab
+
 
 " All of this stuff is for gnu style.
 
@@ -23,7 +35,6 @@ setlocal smarttab
 "setlocal fo+=cqt
 "setlocal fo+=qt
 "setlocal fo+=t
-"setlocal expandtab
-"" This is what it was before but I removed l because it meant that text comments
-"" weren't automatically broken while I was typing.
-""setlocal fo-=ro fo+=cql
+" This is what it was before but I removed l because it meant that text comments
+" weren't automatically broken while I was typing.
+"setlocal fo-=ro fo+=cql
