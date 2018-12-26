@@ -34,6 +34,8 @@ Plug 'jaxbot/semantic-highlight.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'idanarye/vim-merginal'
 Plug 'tpope/vim-dispatch'
+" Make working with CMake easier.
+Plug 'vhdirk/vim-cmake'
 
 " ctags
 Plug 'xolox/vim-misc'
@@ -50,7 +52,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'justmao945/vim-clang'
 " Plug 'Shougo/neocomplete.vim'
-Plug 'Rip-Rip/clang_complete'
+" Plug 'Rip-Rip/clang_complete'
+Plug 'zchee/deoplete-clang'
+Plug 'Shougo/neoinclude.vim'
 " Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
 
@@ -71,7 +75,7 @@ Plug 'tpope/vim-rails'
 
 " Rust Programming
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
+" Plug 'racer-rust/vim-racer'
 Plug 'sebastianmarkow/deoplete-rust'
 
 " Java programming
@@ -148,6 +152,7 @@ set scrolloff=5
 
 " Enable external vimrcs for specific projects.
 set exrc
+set secure
 
 " Set the current directory to the file automatically.
 set autochdir
@@ -191,7 +196,7 @@ set shiftwidth=4
 " want those annoying characters for spaces.
 "set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
 set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
-" set list
+set list
 
 
 " Netrw
@@ -227,7 +232,7 @@ match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 set background=dark
 " colorscheme default
 " colorscheme hybrid
-" colorscheme solarized
+" colorscheme solarized8
 colorscheme gruvbox
 
 
@@ -349,6 +354,12 @@ nnoremap <leader>lr :GoRun<CR>
 nnoremap <leader>li :GoInstall<CR>
 nnoremap <leader>lf :GoFmt<CR>
 
+" For working with diffs
+nnoremap <leader>du :diffupdate<CR>
+nnoremap <leader>dp :diffput<CR>
+nnoremap <leader>dg2 :diffget //2<CR>
+nnoremap <leader>dg3 :diffget //3<CR>
+
 " Shortcuts for formatting code using ClangFormat
 nnoremap <leader>fm :ClangFormat<CR>
 
@@ -435,17 +446,30 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " clang_complete
 " path to directory where library can be found
-let g:clang_library_path='/usr/lib/llvm/6/lib64'
+" let g:clang_library_path='/usr/lib/llvm/7/lib64'
 " or path directly to the library file
 " let g:clang_library_path='/usr/lib64/libclang.so.3.8'
+let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm/7/lib64/libclang.so'
+let g:deoplete#sources#clang#clang_header='/usr/lib/clang'
 " Turn on the ch extended c mode for .h files instead of c or c++. Used C++ by
 " default.
-let ch_syntax_for_h = 1
+" let ch_syntax_for_h = 1
+let c_syntax_for_h = 1
 
 " Rust
 let g:rustfmt_autosave = 1
-let g:racer_cmd = '/home/jason/.cargo/bin/racer'
-let g:racer_experimental_completer = 1
+" let g:racer_cmd = '/home/jason/.cargo/bin/racer'
+
+" If using deoplete-rust
+let g:deoplete#sources#rust#racer_binary='/home/jason/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/home/jason/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+" Don't know if I actually want this.
+let g:deoplete#sources#rust#show_duplicates=1
+
+" If using vim-racer
+" let g:racer_cmd = "/home/jason/.cargo/bin/racer"
+" let g:racer_experimental_completer = 1
+
 " let g:deoplete#sources#rust#racer_binary = '/home/jason/.cargo/bin/racer'
 " let g:deoplete#sources#rust#rust_source_path = '/home/jason/git/rust/src'
 
