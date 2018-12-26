@@ -29,7 +29,7 @@
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
- '(custom-enabled-themes (quote (solarized-dark)))
+ '(custom-enabled-themes (quote (gruvbox-dark-soft)))
  '(custom-safe-themes
    (quote
     ("62c81ae32320ceff5228edceeaa6895c029cc8f43c8c98a023f91b5b339d633f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
@@ -62,6 +62,9 @@
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
+ '(package-selected-packages
+   (quote
+    (solarized-theme sml-mode slime paredit gruvbox-theme geiser exec-path-from-shell)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
@@ -102,7 +105,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fantasque Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 119 :width normal)))))
+ '(default ((t (:family "Fantasque Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 111 :width normal)))))
 
 ;; For displaying whitespace and highlighting lines that are too long.
 (require 'whitespace)
@@ -130,18 +133,22 @@
 ;; Path to find the Common Lisp hyperspec. This is Gentoo's default install location.
 (setq common-lisp-hyperspec-root "/usr/share/doc/hyperspec/HyperSpec/")
 
+(defun activate-lisp-settings ()
+  "Activates appropriate settings for editing Lisp languages."
+  (interactive)
+  (setq whitespace-line-column 80)
+  (setq-default indent-tabs-mode nil)
+  (enable-paredit-mode))
+
 ;; Set column limit to 100 and disable tabs for Common Lisp.
-(add-hook 'lisp-mode-hook (lambda ()
-                            (setq whitespace-line-column 100)
-                            (setq-default indent-tabs-mode nil)))
+(add-hook 'lisp-mode-hook 'activate-lisp-settings)
 ;; Same thing for Scheme.
-(add-hook 'scheme-mode-hook (lambda ()
-			      (setq whitespace-line-column 100)
-			      (setq-default indent-tabs-mode nil)))
+(add-hook 'scheme-mode-hook 'activate-lisp-settings)
 ;; Same thing for Emacs Lisp.
-(add-hook 'elisp-mode-hook (lambda ()
-			      (setq whitespace-line-column 100)
-			      (setq-default indent-tabs-mode nil)))
+(add-hook 'elisp-mode-hook 'activate-lisp-settings)
+
+(add-hook 'sml-mode-hook (lambda ()
+			   (setq-default indent-tabs-mode nil)))
 
 ;; Run this so that Emacs uses local environment variables, such as PATH.
 (exec-path-from-shell-initialize)
