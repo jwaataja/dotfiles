@@ -64,7 +64,7 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'tell-k/vim-autopep8'
 
 " Go Programming
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " Ruby Programming
