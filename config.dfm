@@ -1,11 +1,21 @@
 vim:
 	.vimrc
-	c.vim ~/.vim/after/ftplugin
-	cpp.vim ~/.vim/after/ftplugin
-	python.vim ~/.vim/after/ftplugin
-	go.vim ~/.vim/after/ftplugin
-	ruby.vim ~/.vim/after/ftplugin
-	.ycm_extra_conf.py
+	ftplugin/c.vim ~/.vim/after/ftplugin
+	ftplugin/cpp.vim ~/.vim/after/ftplugin
+	ftplugin/python.vim ~/.vim/after/ftplugin
+	ftplugin/go.vim ~/.vim/after/ftplugin
+	ftplugin/html.vim ~/.vim/after/ftplugin
+	ftplugin/lisp.vim ~/.vim/after/ftplugin
+	ftplugin/scheme.vim ~/.vim/after/ftplugin
+	ftplugin/sh.vim ~/.vim/after/ftplugin
+	ftplugin/tex.vim ~/.vim/after/ftplugin
+	ftplugin/css.vim ~/.vim/after/ftplugin
+	ftplugin/java.vim ~/.vim/after/ftplugin
+	ftplugin/markdown.vim ~/.vim/after/ftplugin
+	ftplugin/scss.vim ~/.vim/after/ftplugin
+	ftplugin/text.vim ~/.vim/after/ftplugin
+	ftplugin/vim.vim ~/.vim/after/ftplugin
+	ftplugin/ruby.vim ~/.vim/after/ftplugin
 install:
 	dep vim git
 	sh
