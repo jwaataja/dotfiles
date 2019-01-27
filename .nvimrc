@@ -360,6 +360,12 @@ nnoremap <leader>dp :diffput<CR>
 nnoremap <leader>dg2 :diffget //2<CR>
 nnoremap <leader>dg3 :diffget //3<CR>
 
+" Shortcuts for working with ctags and ctrlp.
+nnoremap <leader>pt :CtrlPTag<CR>
+" Doesn't match what you would expect (ts) because of other binding. The space
+" at the end is intentional
+nnoremap <leader>tl :tselect 
+
 " Shortcuts for formatting code using ClangFormat
 nnoremap <leader>fm :ClangFormat<CR>
 
