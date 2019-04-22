@@ -390,8 +390,8 @@ nnoremap <silent> <leader>ti :call ToggleIndentation()<cr>
 " Toggle between 80 and 100 spaces.
 nnoremap <silent> <leader>tt :call ToggleTextWidth()<cr>
 
-" Run ctags in the current directory.
-nnoremap <leader>ct :!ctags -R .<cr>
+" Run ctags in the current directory. The second return exits the prompt.
+nnoremap <leader>ct :!ctags -R .<cr><cr>
 
 " Delete all trailing whitespace in the current file. Stands for "delete
 " trailing whitespace".
