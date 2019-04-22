@@ -245,6 +245,9 @@ set guifont=Source\ Code\ Pro\ 10
 " Use this font for Windows. It might not work on other systems, though.
 " set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
 
+" This makes LaTeX do spell checking on the whole document
+syntax sync fromstart
+
 
 
 
