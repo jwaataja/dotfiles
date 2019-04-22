@@ -152,6 +152,7 @@ set scrolloff=5
 
 " Enable external vimrcs for specific projects.
 set exrc
+" Make exrc secure by disabling features
 set secure
 
 " Set the current directory to the file automatically.
@@ -396,6 +397,12 @@ nnoremap <leader>ct :!ctags -R .<cr>
 " trailing whitespace".
 " TODO: "g" necessary here?
 nnoremap <leader>dt :%s/\s\+$//g<cr>``
+
+
+
+
+" ctrlp settings
+let g:ctrlp_extensions = ['tag']
 
 
 
