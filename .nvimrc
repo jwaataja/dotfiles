@@ -10,11 +10,14 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/candycode.vim'
 Plug 'w0ng/vim-hybrid'
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'crusoexia/vim-dracula'
 Plug 'tomasr/molokai'
 Plug 'romainl/Apprentice'
 Plug 'nanotech/jellybeans.vim'
 Plug 'sjl/badwolf'
+Plug 'junegunn/seoul256.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " A status line.
 " Plug 'vim-airline/vim-airline'
@@ -230,11 +233,27 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgree
 match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 
 " Colors
-set background=dark
+" set background=dark
+" 0
 " colorscheme default
+" 4
+" colorscheme apprentice
+" 5
 " colorscheme hybrid
+" 4
+" colorscheme jellybeans
+" 5
+" colorscheme badwolf
+" 6
+" colorscheme seoul256
+" 5
+" colorscheme nord
+" 7
+colorscheme hybrid_material
+" 8
 " colorscheme solarized8
-colorscheme gruvbox
+" 10
+" colorscheme gruvbox
 
 
 " Fonts
