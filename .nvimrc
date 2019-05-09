@@ -18,6 +18,10 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'sjl/badwolf'
 Plug 'junegunn/seoul256.vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'crusoexia/vim-monokai'
+Plug 'cormacrelf/vim-colors-github'
+Plug 'tomasiser/vim-code-dark'
+Plug 'kaicataldo/material.vim'
 
 " A status line.
 " Plug 'vim-airline/vim-airline'
@@ -222,6 +226,7 @@ let g:gruvbox_underline=1
 let g:gruvbox_undercurl=1
 " Set the contrast to be lower.
 let g:gruvbox_contrast_dark = "soft"
+" let g:gruvbox_contrast_dark = "medium"
 let g:gruvbox_contrast_light = "soft"
 
 " Highlight trailing whitespace.
@@ -234,14 +239,21 @@ match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 
 " Colors
 " set background=dark
+
 " 0
 " colorscheme default
 " 4
 " colorscheme apprentice
 " 5
 " colorscheme hybrid
+" 3
+" colorscheme github
 " 4
 " colorscheme jellybeans
+" 4
+colorscheme monokai
+" 5
+" colorscheme codedark
 " 5
 " colorscheme badwolf
 " 6
@@ -249,7 +261,7 @@ match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 " 5
 " colorscheme nord
 " 7
-colorscheme hybrid_material
+" colorscheme hybrid_material
 " 8
 " colorscheme solarized8
 " 10
@@ -258,7 +270,7 @@ colorscheme hybrid_material
 
 " Fonts
 " set guifont=DejaVu\ Sans\ Mono\ 11
-set guifont=Source\ Code\ Pro\ 10
+" set guifont=Source\ Code\ Pro\ 10
 " set guifont=Inconsolata\ 11
 
 " Use this font for Windows. It might not work on other systems, though.
@@ -425,6 +437,8 @@ nnoremap <leader>dt :%s/\s\+$//g<cr>``
 
 " ctrlp settings
 let g:ctrlp_extensions = ['tag']
+let g:ctrlp_max_files = 0
+let g:ctrlp_max_depth = 40
 
 
 
