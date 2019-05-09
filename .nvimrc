@@ -258,10 +258,14 @@ colorscheme monokai
 " colorscheme badwolf
 " 6
 " colorscheme seoul256
+" 4
+" colorscheme monokai
 " 5
 " colorscheme nord
 " 7
 " colorscheme hybrid_material
+" 6
+" colorscheme material
 " 8
 " colorscheme solarized8
 " 10
