@@ -18,6 +18,8 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'sjl/badwolf'
 Plug 'junegunn/seoul256.vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'crusoexia/vim-monokai'
+Plug 'kaicataldo/material.vim'
 
 " A status line.
 " Plug 'vim-airline/vim-airline'
@@ -246,10 +248,14 @@ match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 " colorscheme badwolf
 " 6
 " colorscheme seoul256
+" 4
+" colorscheme monokai
 " 5
 " colorscheme nord
 " 7
 colorscheme hybrid_material
+" 6
+" colorscheme material
 " 8
 " colorscheme solarized8
 " 10
