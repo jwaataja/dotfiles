@@ -6,6 +6,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Colors
 " Plug 'altercation/vim-colors-solarized'
+" This should be a better version of the above solarized plugin that works
+" without any annoying terminal configuration (why should I ever have to
+" configure the colors of my terminal for my vim plugin to work correctly?)
+Plug 'ericbn/vim-solarized'
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/candycode.vim'
@@ -22,6 +26,10 @@ Plug 'crusoexia/vim-monokai'
 Plug 'cormacrelf/vim-colors-github'
 Plug 'tomasiser/vim-code-dark'
 Plug 'kaicataldo/material.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
+Plug 'gosukiwi/vim-atom-dark'
 
 " A status line.
 " Plug 'vim-airline/vim-airline'
@@ -268,8 +276,22 @@ colorscheme monokai
 " colorscheme material
 " 8
 " colorscheme solarized8
+" 8
+" colorscheme solarized
 " 10
 " colorscheme gruvbox
+" This is Atom's default dark theme
+" 5
+" colorscheme atom-dark
+" This is a different atom theme. This and the one after are basically the same
+" except this one has a light blue where the next has a red. This first one also
+" highlights more things purple it seems (in Rust, in C++ the other highlights
+" more purple.
+" 7
+" colorscheme onedark
+" Yet another one from atom
+" 6
+" colorscheme one
 
 
 " Fonts
