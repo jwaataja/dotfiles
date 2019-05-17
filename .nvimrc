@@ -258,16 +258,15 @@ match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 " colorscheme github
 " 4
 " colorscheme jellybeans
+" This is the sublime theme
 " 4
-colorscheme monokai
-" 5
+" colorscheme monokai
+" 5 - This is what VSCode uses
 " colorscheme codedark
 " 5
 " colorscheme badwolf
 " 6
 " colorscheme seoul256
-" 4
-" colorscheme monokai
 " 5
 " colorscheme nord
 " 7
@@ -288,7 +287,7 @@ colorscheme monokai
 " highlights more things purple it seems (in Rust, in C++ the other highlights
 " more purple.
 " 7
-" colorscheme onedark
+colorscheme onedark
 " Yet another one from atom
 " 6
 " colorscheme one
