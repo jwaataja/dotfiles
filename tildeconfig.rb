@@ -41,7 +41,7 @@ mod :i3 do |m|
 end
 
 mod :redshift do |m|
-  m.file ".config/redshift.config"
+  m.file ".config/redshift.conf"
 end
 
 mod :jws do |m|
