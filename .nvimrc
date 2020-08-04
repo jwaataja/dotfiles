@@ -32,59 +32,33 @@ Plug 'joshdick/onedark.vim'
 Plug 'gosukiwi/vim-atom-dark'
 Plug 'ghifarit53/tokyonight-vim'
 
-" A status line.
-" Plug 'vim-airline/vim-airline'
-" Plug 'powerline/powerline'
-
-" Syntax checking, mainly for Python.
-" Plug 'vim-syntastic/syntastic'
-" Plug 'neomake/neomake'
-
-" Mainly for haskell formatting with Brittany
-Plug 'sbdchd/neoformat'
-
-" For asynchronous linting, etc.
-Plug 'w0rp/ale'
-
-"Syntax highlighting
-"For C, choose one of these.
+" Syntax highlighting
+" For C, choose one of these.
 " Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'justinmk/vim-syntax-extra'
-Plug 'jaxbot/semantic-highlight.vim'
+" Plug 'jaxbot/semantic-highlight.vim'
 " For C++
 Plug 'bfrg/vim-cpp-modern'
 
+" Syntax highlighting for jsonc
+Plug 'kevinoid/vim-jsonc'
+
 " For git and compiling.
 Plug 'tpope/vim-fugitive'
-" Plug 'idanarye/vim-merginal'
+Plug 'idanarye/vim-merginal'
 Plug 'tpope/vim-dispatch'
 " Make working with CMake easier.
 Plug 'vhdirk/vim-cmake'
 
-" ctags
-Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-easytags'
-
-" Plug 'roman/golden-ratio'
-
 " For easy comment management.
 Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-commentary'
 
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Completion for programming in various languages.
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'justmao945/vim-clang'
-" Plug 'Shougo/neocomplete.vim'
-" Plug 'Rip-Rip/clang_complete'
-Plug 'deoplete-plugins/deoplete-clang'
-Plug 'Shougo/neoinclude.vim'
-" Plug 'davidhalter/jedi-vim'
-Plug 'zchee/deoplete-jedi'
+" Plug 'Shougo/neoinclude.vim'
 
 " Coc.nvim
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Extra completion sources
 
 " For Python programming.
 Plug 'nvie/vim-flake8'
@@ -93,18 +67,15 @@ Plug 'tell-k/vim-autopep8'
 
 " Go Programming
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+" Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " Ruby Programming
 " I'm not sure if I'm supposed to have both installed.
 Plug 'vim-ruby/vim-ruby'
-Plug 'fishbullet/deoplete-ruby'
 Plug 'tpope/vim-rails'
 
 " Rust Programming
 Plug 'rust-lang/rust.vim'
-" Plug 'racer-rust/vim-racer'
-Plug 'sebastianmarkow/deoplete-rust'
 
 " Haskell Programming
 Plug 'neovimhaskell/haskell-vim'
@@ -113,21 +84,15 @@ Plug 'neovimhaskell/haskell-vim'
 " Indentation
 Plug 'alx741/vim-hindent'
 
-" Java programming
-" Plug 'artur-shaik/vim-javacomplete2'
-
 " For formatting code
 Plug 'rhysd/vim-clang-format'
-Plug 'Chiel92/vim-autoformat'
 
 " For C# programming
 Plug 'OmniSharp/omnisharp-vim'
 
 " For writing HTML.
+" HTML and CSS validation
 Plug 'arunsahadeo/webval'
-
-" Javascript
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 " LaTeX
 Plug 'vim-latex/vim-latex'
@@ -152,7 +117,7 @@ Plug 'vimoutliner/vimoutliner'
 " Tagbar for C, C++, and Go.
 Plug 'majutsushi/tagbar'
 
-" Physics based scrolling
+" " Physics based scrolling
 " Plug 'yuttie/comfortable-motion.vim'
 
 " All of your Plugins must be added before the following line
@@ -197,7 +162,9 @@ set relativenumber
 " Underlines current line.
 set cursorline
 
-" Cursor can't be on the top or bottom line.
+" Normally, scrolling occurs when the cursor reaches the top or bottom of the
+" screen. Instead, scroll when five lines from the top or bottom so that the
+" surrounding lines are always visible.
 set scrolloff=5
 
 " Enable external vimrcs for specific projects.
@@ -205,7 +172,9 @@ set exrc
 " Make exrc secure by disabling features
 set secure
 
-" Set the current directory to the file automatically.
+" Set the current directory to the file automatically. This makes opening files
+" similar to emacs, where if you open a relative path it will search the
+" directory of the current file.
 set autochdir
 
 " For airline for some reason
@@ -214,7 +183,7 @@ set laststatus=2
 " For mouse.
 set mouse=a
 
-" To make searching ignore case unless a non-lower case letter is searched for,
+" Make searching ignore case unless a non-lower case letter is searched for,
 " like emacs.
 set ignorecase
 set smartcase
@@ -229,27 +198,23 @@ set colorcolumn=80
 " For making tab completion better
 set switchbuf=useopen,usetab
 
-" Disables autocommenting.
-"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" " Disables autocommenting.
+" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "set formatoptions-=cro
 "
 " set formatoptions-=c
 " set formatoptions-=r
 " set formatoptions-=o
 
-" Sets tabs to be represented by four spaces to maake reading files easier. This
-" doesn't make it so that tabs are spaces, and these settings should be
-" overridden in language specific settings such as C.
+" Display tabs with a width of 4.
 set tabstop=4
 set shiftwidth=4
 
-" Display whitespace chars as certain characters. Delete this stuff if you don't
-" want those annoying characters for spaces.
-"set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
+" Display whitespace characters using special symbols.
+" set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
 set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
 " This version is solarized friendly
 " set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,eol:¬
-
 set list
 
 
@@ -269,7 +234,7 @@ set termguicolors
 
 " " Enable italics in terminal.
 let g:gruvbox_italic=1
-" " Get rid ot that annoying bold gruvbox stuff.
+" " Get rid of that annoying bold gruvbox stuff.
 " let g:gruvbox_bold=0
 " " Other gruvbox stuff.
 " Set the contrast to be lower.
@@ -292,7 +257,11 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgree
 " Show trailing whitespace except when typing at the end of a line.
 match ExtraWhitespace /\s\+\%#\@<!$\| \+\ze\t/
 
+" Correct highlighting for comments in jsonc
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 " Colors
+" Many colorschemes use this setting, such as solarized and gruvbox.
 " set background=dark
 
 " 0
@@ -402,7 +371,7 @@ endfunction
 
 " Key bindings and whatnot.
 
-let mapleader=","
+let mapleader = ","
 
 nnoremap <leader>pd i@PolyDet <esc>
 
@@ -421,13 +390,7 @@ noremap <F4> :Make<CR>
 " Clear the highlighting on strings that were searched
 nnoremap <leader>no :noh<CR>
 
-" Toggle on and off relative lines numbers.
-noremap <leader>rn :set relativenumber!<CR>
-
-" Toggle indentation between 2 and 4 spaces
-nnoremap <leader>ti :call ToggleIndentation()<cr>
-
-" Insert brackets
+" Insert matching curly braces.
 inoremap <leader>{ {<enter>}<esc>ko
 
 " Toggle the background color in colorthemes like solarized or gruvbox.
@@ -478,23 +441,11 @@ nnoremap <leader>dg3 :diffget //3<CR>
 
 " Shortcuts for working with ctags and ctrlp.
 nnoremap <leader>pt :CtrlPTag<CR>
-" Doesn't match what you would expect (ts) because of other binding. The space
-" at the end is intentional
-nnoremap <leader>tl :tselect 
+" Doesn't match what you would expect (ts) because of other binding.
+nnoremap <leader>tl :tselect<space>
 
 " Shortcuts for formatting code using ClangFormat
-nnoremap <leader>fm :ClangFormat<CR>
-
-" For activating C++ completion thing.
-" inoremap <C-Z> <C-X><C-O>
-" inoremap <C-Space> <C-x><C-o>
-" inoremap <C-@> <C-Space>
-
-" Make it so that I don't have to press the colon key.
-" nnoremap <CR> :
-
-" Easy escape.
-" inoremap ii <Esc>
+nnoremap <leader>cfm :ClangFormat<CR>
 
 " Make it so that double tapping the '/' character converts the search.
 nnoremap <silent> <c-s> :call SplitSearch()<cr>n
@@ -513,14 +464,6 @@ nnoremap <leader>ct :!ctags -R .<cr><cr>
 " TODO: "g" necessary here?
 nnoremap <leader>dt :%s/\s\+$//g<cr>``
 
-" ALE mappings for navigating code, etc.
-nnoremap <leader>agd :ALEGoToDefinition<cr>
-nnoremap <leader>agv :ALEGoToDefinition -vsplit<cr>
-nnoremap <leader>agt :ALEGoToDefinition -tab<cr>
-nnoremap <leader>atd :ALEGoToTypeDefinition<cr>
-nnoremap <leader>atv :ALEGoToTypeDefinition -vsplit<cr>
-nnoremap <leader>att :ALEGoToTypeDefinition -tab<cr>
-nnoremap <leader>af :ALEFix<cr>
 
 
 
@@ -533,140 +476,113 @@ let g:ctrlp_max_depth = 40
 
 
 
-" Neomake stuff
-" autocmd! BufWritePost * Neomake
-let g:neomake_cpp_enabled_makers = ['clang']
-let g:neomake_cpp_clang_maker = {
-   \ 'exe': 'clang++',
-   \ 'args': ['-Wall', '-Wextra', '-std=gnu++11',
-   \'`pkg-config --cflags libxml++-3.0`'],
-   \ }
-let g:neomake_c_enabled_makers = ['clang']
-let g:neomake_c_clang_maker = {
-   \ 'exe': 'clang',
-   \ 'args': ['-Wall', '-Wextra', '-std=gnu11'],
-   \ }
-" let g:neomake_python_flake8_maker = {
-"    \ 'exe': 'flake8',
-"    \ }
-" let g:neomake_cpp_enabled_makers = ['clang']
-" let g:neomake_cpp_clang_maker = {
-"    \ 'exe': 'clang++',
-"    \ 'args': ['-Wall', '-Wextra', '-Weverything', '-Wno-sign-conversion', '-std=gnu++11'],
-"    \ }
-let g:neomake_java_enabled_makers = []
+" NERDCommenter settings
 
-
-" Completion
-let g:deoplete#enable_at_startup = 1
-" let g:deoplete#ignore_sources = {}
-" let g:deoplete#ignore_sources._ = ['buffer', 'around']
-" If we want to exclude ale in C++.
-" call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around'], 'c': ['ale'], 'cpp': ['ale']})
-call deoplete#custom#option('ignore_sources', {'c': ['ale'], 'cpp': ['ale']})
-
-" Without this, completion from tags may not work, see https://github.com/Shougo/deoplete.nvim/issues/309
-let deoplete#tag#cache_limit_size = 5000000
-" call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around']})
-" let g:deoplete#sources = {}
-" let g:deoplete#sources.cs = ['omni', 'file', 'buffer', 'ultisnips']
-" call deoplete#custom#option('sources', {
-"             \ 'cs': ['cs', 'ultisnips', 'file', 'buffer'],
-"             \ 'c': ['clang', 'ultisnips'],
-"             \ 'cpp': ['clang', 'ultisnips'],
-"             \})
-" This version includes ale.
-" call deoplete#custom#option('sources', {
-"             \ '_': ['ale'],
-"             \ 'cs': ['cs', 'ultisnips', 'file', 'buffer'],
-"             \})
-" call deoplete#custom#option('omni_patterns', {
-"             \ 'cs': '\w*',
-"             \})
-" Make it so that deoplete starts completing after one character typed, rather
-" than two.
-" call deoplete#custom#option('min_pattern_length', 1)
-" For C#, call the omnicompletion when this pattern is matched.
-" call deoplete#custom#option('omni_patterns', {
-"             \ 'cs': ['[^. *\t]\.\w*', '[a-zA-Z]\w*'],
-"             \})
-" if !exists('g:deoplete#omni#input_patterns')
-"   let g:deoplete#omni#input_patterns = {}
-" endif
-" This would prevent the screen from cluttering with text.
-" let g:deoplete#disable_auto_complete = 1
-" Close the preview window when finished.
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
-" omnifuncs
-augroup omnifuncs
-    autocmd!
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType xml let g:deoplete#disable_auto_complete = 1
-    autocmd FileType java setlocal omnifunc=javacomplete#Complete
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-augroup end
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" Ale settings
-" Let ale search in 'build' directories for compile_commands.json.
-let g:ale_c_parse_compile_commands=1
-
-" Display linter name with error message.
-let g:ale_echo_msg_format = '[%linter%] %s'
-
-" Use the c++ filetype for .h files and use the C++20 standard
-let g:ale_c_clang_options = '-x c++ -std=c++2a'
-let g:ale_c_clangd_options = '-x c++ -std=c++2a'
-let g:ale_cpp_clangtidy_options = '-x c++ -std=c++2a'
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
 
 
 
-" clang_complete
-" path to directory where library can be found
-" let g:clang_library_path='/usr/lib/llvm/7/lib64'
-" or path directly to the library file
-" let g:clang_library_path='/usr/lib64/libclang.so.3.8'
 
-" vim-clang
-" Sets the location for compile_commads.json.
-" let g:clang_compilation_database = './build'
 
-" deoplete-clang
-let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm/10/lib64/libclang.so'
-let g:deoplete#sources#clang#clang_header='/usr/lib/clang'
+" Coc.nvim
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Close the preview window when completion is done.
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Show list of available actions. This does all sorts of useful things like show
+" available fixes, allow renaming, add an import, etc.
+nnoremap <leader>aa :CocAction<cr>
+
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+
+
+
 
 " Turn on the ch extended c mode for .h files instead of c or c++. Used C++ by
 " default.
 " let ch_syntax_for_h = 1
-let g:c_syntax_for_h = 1
+" let g:c_syntax_for_h = 1
 " let c_syntax_for_h = 1
 
 " Rust
+" Automatically format rust code on save.
 let g:rustfmt_autosave = 1
 
-" If using deoplete-rust
-let g:deoplete#sources#rust#racer_binary='/home/jason/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/home/jason/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
-" Don't know if I actually want this.
-" let g:deoplete#sources#rust#show_duplicates=1
-
-" If using vim-racer
-" let g:racer_cmd = "/home/jason/.cargo/bin/racer"
-let g:racer_experimental_completer = 1
-
 " Java related settings
-" Disable automatic formatting in Java.
+" Disable automatic formatting in Java from clang-format.
 au FileType java let g:clang_format#auto_format = 0
-" au FileType java ALEDisable
-
-" let g:deoplete#sources#rust#racer_binary = '/home/jason/.cargo/bin/racer'
-" let g:deoplete#sources#rust#rust_source_path = '/home/jason/git/rust/src'
 
 " LaTeX
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
@@ -674,7 +590,7 @@ au FileType java let g:clang_format#auto_format = 0
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
-" Use zathura by default
+" Use zathura as pdf viewer by default.
 let g:Tex_ViewRule_pdf='zathura'
 
 
