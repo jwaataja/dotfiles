@@ -31,6 +31,7 @@ Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
 Plug 'gosukiwi/vim-atom-dark'
 Plug 'ghifarit53/tokyonight-vim'
+Plug 'habamax/vim-gruvbit'
 
 " Syntax highlighting
 " For C, choose one of these.
@@ -106,6 +107,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Fuzzy finding.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" This is the vim plugin for fzf that builds on the previous plugin.
+Plug 'junegunn/fzf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Use ripgrep in vim
@@ -116,6 +120,9 @@ Plug 'vimoutliner/vimoutliner'
 
 " Tagbar for C, C++, and Go.
 Plug 'majutsushi/tagbar'
+
+" Read .editorconfig files for project specific settings
+Plug 'editorconfig/editorconfig-vim'
 
 " " Physics based scrolling
 " Plug 'yuttie/comfortable-motion.vim'
@@ -217,6 +224,13 @@ set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
 " set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,eol:¬
 set list
 
+" Fold settings
+" Fold base on the syntax of a file
+set foldmethod=syntax
+" Files such as LaTex and Ruby start folded. This keeps folding enable while
+" disabling automatic folding when opening a file.
+set foldlevelstart=20
+
 
 " Netrw
 " " Make the window smaller.
@@ -310,6 +324,8 @@ let g:onedark_termcolors=256
 " colorscheme one
 " 7
 " colorscheme tokyonight
+" 8
+" colorscheme gruvbit
 
 
 " Fonts
@@ -399,7 +415,7 @@ map <leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR
 " For faster use of vim-fugitive.
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gw :Gwrite<CR>
-nnoremap <leader>gg :Git<space>
+nnoremap <leader>gg :Gstatus<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>go :Git checkout<space>
 nnoremap <leader>gr :Gread<CR>
@@ -473,6 +489,9 @@ let g:ctrlp_extensions = ['tag']
 let g:ctrlp_max_files = 0
 let g:ctrlp_max_depth = 40
 
+" Fuzzy finding
+nnoremap <C-k> :FZF<cr>
+
 
 
 
@@ -542,6 +561,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 " Show list of available actions. This does all sorts of useful things like show
 " available fixes, allow renaming, add an import, etc.
@@ -636,6 +658,10 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 " g:haskell_classic_highlighting = 1
 
+" Ruby settings
+" Enable folding of language constructs like blocks
+let ruby_fold = 1
+
 
 " Snippets settings
 
@@ -660,3 +686,7 @@ let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 " Set shiftwidth to 72 in git commits.
 au FileType gitcommit set tw=72
+
+" EditorConfig
+" Necessary to work well with vim-fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
