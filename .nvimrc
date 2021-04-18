@@ -2,9 +2,11 @@ set runtimepath+=~/.vim,~/.vim/after
 set packpath+=~/.vim
 filetype off                  " required
 
+let g:polyglot_disabled = ['java', 'autoindent']
+
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Colors
+" Colors and Colorschemes
 Plug 'altercation/vim-colors-solarized'
 " This should be a better version of the above solarized plugin that works
 " without any annoying terminal configuration (why should I ever have to
@@ -32,14 +34,21 @@ Plug 'joshdick/onedark.vim'
 Plug 'gosukiwi/vim-atom-dark'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'habamax/vim-gruvbit'
+Plug 'jsit/toast.vim'
+Plug 'aonemd/kuroi.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'ayu-theme/ayu-vim'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 
 " Syntax highlighting
 " For C, choose one of these.
 " Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'justinmk/vim-syntax-extra'
 " Plug 'jaxbot/semantic-highlight.vim'
+" This plugin is a collection of language packs for syntax highlighting.
+Plug 'sheerun/vim-polyglot'
 " For C++
-Plug 'bfrg/vim-cpp-modern'
+" Plug 'bfrg/vim-cpp-modern'
 
 " Syntax highlighting for jsonc
 Plug 'kevinoid/vim-jsonc'
@@ -65,6 +74,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvie/vim-flake8'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'tell-k/vim-autopep8'
+"" Correct syntax based folding
+Plug 'tmhedberg/SimpylFold'
+
+" General formatting, mostly Haskell.
+Plug 'sbdchd/neoformat'
 
 " Go Programming
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -85,18 +99,24 @@ Plug 'neovimhaskell/haskell-vim'
 " Indentation
 Plug 'alx741/vim-hindent'
 
-" For formatting code
-Plug 'rhysd/vim-clang-format'
+" For formatting code.
+" This plugin automatically formats code on save.
+" Plug 'rhysd/vim-clang-format'
 
 " For C# programming
 Plug 'OmniSharp/omnisharp-vim'
+
+" For Julia programming.
+Plug 'JuliaEditorSupport/julia-vim'
 
 " For writing HTML.
 " HTML and CSS validation
 Plug 'arunsahadeo/webval'
 
 " LaTeX
-Plug 'vim-latex/vim-latex'
+" Two competing plugins: vim-latex and vimtex
+" Plug 'vim-latex/vim-latex'
+Plug 'lervag/vimtex'
 
 " Meson build system support
 Plug 'igankevich/mesonic'
@@ -110,7 +130,7 @@ Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " This is the vim plugin for fzf that builds on the previous plugin.
 Plug 'junegunn/fzf.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 
 " Use ripgrep in vim
 Plug 'jremmen/vim-ripgrep'
@@ -219,9 +239,9 @@ set shiftwidth=4
 
 " Display whitespace characters using special symbols.
 " set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
-set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
+" set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
 " This version is solarized friendly
-" set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,eol:¬
+set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,eol:¬
 set list
 
 " Fold settings
@@ -230,6 +250,10 @@ set foldmethod=syntax
 " Files such as LaTex and Ruby start folded. This keeps folding enable while
 " disabling automatic folding when opening a file.
 set foldlevelstart=20
+
+" Automatically reread open files if they've changed on disk and there are no
+" unwritten changes.
+set autoread
 
 
 " Netrw
@@ -276,7 +300,7 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Colors
 " Many colorschemes use this setting, such as solarized and gruvbox.
-" set background=dark
+set background=dark
 
 " 0
 " colorscheme default
@@ -303,12 +327,14 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " colorscheme hybrid_material
 " 6
 " colorscheme material
+" This is the one to use instead of vanilla solarized. Works better without
+" terminal configuration.
 " 8
-" colorscheme solarized8
+colorscheme solarized8
 " 8
 " colorscheme solarized
 " 10
-colorscheme gruvbox
+" colorscheme gruvbox
 " This is Atom's default dark theme
 " 5
 " colorscheme atom-dark
@@ -326,6 +352,28 @@ let g:onedark_termcolors=256
 " colorscheme tokyonight
 " 8
 " colorscheme gruvbit
+" 6
+" colorscheme toast
+" 6
+" set background=dark
+" colorscheme kuroi
+" Another atom clone
+" colorscheme onehalfdark
+" 2
+" let ayucolor="light"  " for light version of theme
+" 7
+" let ayucolor="mirage" " for mirage version of theme
+" 6
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
+" " 3
+" " Spaceduck stuff
+" if exists('+termguicolors')
+    " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    " set termguicolors
+" endif
+" colorscheme spaceduck
 
 
 " Fonts
@@ -480,6 +528,16 @@ nnoremap <leader>ct :!ctags -R .<cr><cr>
 " TODO: "g" necessary here?
 nnoremap <leader>dt :%s/\s\+$//g<cr>``
 
+nnoremap <C-p> :Files<cr>
+nnoremap <A-p> :GFiles<cr>
+
+
+
+
+
+" vim-fugitive git settings
+set diffopt+=horizontal
+
 
 
 
@@ -591,6 +649,10 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 
 
+" Disable autoindenting with vim-polyglot because it doesn't seem to work
+" correctly for Java files.
+" let g:polyglot_disabled = ['autoindent']
+" let g:polyglot_disabled = ['ftdetect']
 
 " Turn on the ch extended c mode for .h files instead of c or c++. Used C++ by
 " default.
@@ -606,7 +668,7 @@ let g:rustfmt_autosave = 1
 " Disable automatic formatting in Java from clang-format.
 au FileType java let g:clang_format#auto_format = 0
 
-" LaTeX
+" LaTeX Suite
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
@@ -614,6 +676,20 @@ let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 " Use zathura as pdf viewer by default.
 let g:Tex_ViewRule_pdf='zathura'
+
+" vim-latex
+
+" Set pdf viewer to Zathura.
+let g:vimtex_view_method = 'zathura'
+" let g:vimtex_latexmk_progname = 'nvr'
+
+" Don't show overfull hbox warnings
+let g:Tex_IgnoredWarnings = 'Overfull'
+" Ignore overfull and underfull hbox warnings.
+let g:vimtex_quickfix_ignore_filters = [
+            \'Underfull \\hbox (badness [0-9]*) in ',
+            \'Overfull \\hbox ([0-9]*.[0-9]*pt too wide) in ',
+            \]
 
 
 " Python stuff
@@ -661,6 +737,8 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 " Ruby settings
 " Enable folding of language constructs like blocks
 let ruby_fold = 1
+" This enables the coc-solargraph plugin.
+let g:coc_global_extensions = ['coc-solargraph']
 
 
 " Snippets settings
@@ -690,3 +768,42 @@ au FileType gitcommit set tw=72
 " EditorConfig
 " Necessary to work well with vim-fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" Ocaml stuff.
+" " ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
+" let s:opam_share_dir = system("opam config var share")
+" let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
+" 
+" let s:opam_configuration = {}
+" 
+" function! OpamConfOcpIndent()
+  " execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
+" endfunction
+" let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
+" 
+" function! OpamConfOcpIndex()
+  " execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
+" endfunction
+" let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
+" 
+" function! OpamConfMerlin()
+  " let l:dir = s:opam_share_dir . "/merlin/vim"
+  " execute "set rtp+=" . l:dir
+" endfunction
+" let s:opam_configuration['merlin'] = function('OpamConfMerlin')
+" 
+" let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
+" let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
+" let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
+" for tool in s:opam_packages
+  " " Respect package order (merlin should be after ocp-index)
+  " if count(s:opam_available_tools, tool) > 0
+    " call s:opam_configuration[tool]()
+  " endif
+" endfor
+" " ## end of OPAM user-setup addition for vim / base ## keep this line
+" " ## added by OPAM user-setup for vim / ocp-indent ## 86fc06f0b72fcd5f6e0b7f3a6d081c5c ## you can edit, but keep this line
+" if count(s:opam_available_tools,"ocp-indent") == 0
+  " source "/home/jason/.opam/default/share/ocp-indent/vim/indent/ocaml.vim"
+" endif
+" " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
