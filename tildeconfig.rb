@@ -1,7 +1,7 @@
 mod :vim do |m|
   m.pkg_dep "vim", "git"
-  m.file ".vimrc"
-  m.file "ftplugin", ".vim/after/ftplugin"
+  m.file_sym ".vimrc"
+  m.file_sym "ftplugin", ".vim/after/ftplugin"
   m.install do
     sh "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
   end
@@ -9,8 +9,8 @@ end
 
 mod :neovim => [:vim] do |m|
   m.pkg_dep "curl"
-  m.file ".nvimrc"
-  m.file ".config/nvim/init.vim"
+  m.file_sym ".nvimrc"
+  m.file_sym ".config/nvim/init.vim"
   m.install do
     sh "curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     puts "Please open vim and run 'PlugInstall'"
