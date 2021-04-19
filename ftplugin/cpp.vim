@@ -16,3 +16,17 @@ setlocal shiftwidth=4
 setlocal tabstop=4
 setlocal expandtab
 setlocal textwidth=79
+
+" For CSE333
+
+" setlocal shiftwidth=2
+" setlocal tabstop=2
+" setlocal softtabstop=2
+" setlocal expandtab
+" setlocal textwidth=80
+
+" setlocal cindent
+" setlocal cinoptions=h1,l1,g1,t0,i4,+4,(0,w1,W4,N-s
+
+" Use these linters with ALE
+" let b:ale_linters = ['clangtidy', 'cpplint']
