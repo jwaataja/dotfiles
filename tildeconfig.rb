@@ -18,7 +18,7 @@ mod :neovim => [:vim] do |m|
 end
 
 mod :miniterm do |m|
-  m.file ".config/miniterm/miniterm.conf"
+  m.file_sym ".config/miniterm/miniterm.conf"
 end
 
 mod :emacs do |m|
