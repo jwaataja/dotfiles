@@ -27,8 +27,9 @@ mod :emacs do |m|
 end
 
 mod :i3 do |m|
-  m.file ".i3"
-  m.file ".i3status.conf"
+  m.file_sym ".config/i3/config"
+  # TODO: Setup i3 blocks.
+  # m.file ".i3status.conf"
   m.install do
     puts "Please reload i3"
   end
