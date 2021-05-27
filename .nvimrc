@@ -101,7 +101,7 @@ Plug 'alx741/vim-hindent'
 
 " For formatting code.
 " This plugin automatically formats code on save.
-" Plug 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format'
 
 " For C# programming
 Plug 'OmniSharp/omnisharp-vim'
@@ -239,6 +239,7 @@ set shiftwidth=4
 
 " Display whitespace characters using special symbols.
 " set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
+" The real one.
 " set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
 " This version is solarized friendly
 set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,eol:¬
@@ -301,6 +302,7 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " Colors
 " Many colorschemes use this setting, such as solarized and gruvbox.
 set background=dark
+" set background=light
 
 " 0
 " colorscheme default
@@ -331,6 +333,8 @@ set background=dark
 " terminal configuration.
 " 8
 colorscheme solarized8
+" Enable transparent background.
+let g:solarized_termtrans = 1
 " 8
 " colorscheme solarized
 " 10
@@ -461,10 +465,10 @@ inoremap <leader>{ {<enter>}<esc>ko
 map <leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 " For faster use of vim-fugitive.
-nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gc :Git commit<CR>
 nnoremap <leader>gw :Gwrite<CR>
-nnoremap <leader>gg :Gstatus<CR>
-nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gg :Git<CR>
+nnoremap <leader>gp :Git push<CR>
 nnoremap <leader>go :Git checkout<space>
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gd :Gdiff<CR>
@@ -625,7 +629,7 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Show list of available actions. This does all sorts of useful things like show
 " available fixes, allow renaming, add an import, etc.
-nnoremap <leader>aa :CocAction<cr>
+" nnoremap <leader>aa :CocAction<cr>
 
 
 " Use K to show documentation in preview window.
@@ -645,6 +649,77 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 
 
@@ -773,25 +848,25 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " " ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
 " let s:opam_share_dir = system("opam config var share")
 " let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
-" 
+"
 " let s:opam_configuration = {}
-" 
+"
 " function! OpamConfOcpIndent()
   " execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
 " endfunction
 " let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
-" 
+"
 " function! OpamConfOcpIndex()
   " execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
 " endfunction
 " let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
-" 
+"
 " function! OpamConfMerlin()
   " let l:dir = s:opam_share_dir . "/merlin/vim"
   " execute "set rtp+=" . l:dir
 " endfunction
 " let s:opam_configuration['merlin'] = function('OpamConfMerlin')
-" 
+"
 " let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
 " let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
 " let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
