@@ -9,12 +9,13 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# Use the "Windows" key as the primary modifier, instead of Alt.
 set $mod Mod4
 set $sup Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+# font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -27,20 +28,30 @@ font pango:monospace 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-font pango:DejaVu Sans 10
+# font pango:DejaVu Sans 11
+font pango:Cantarell Regular 12
+# font pango:Noto Sans Regular 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+# Start a terminal.
 bindsym $mod+Return exec i3-sensible-terminal
 
-# kill focused window
+# Kill focused window.
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+s exec dmenu_run
-bindsym $mod+s exec rofi -show run
+# bindsym $mod+s exec rofi -show run
+
+# Use rofi as the application launcher, instead of dmenu.
+bindsym $mod+s exec "rofi -combi-modi drun,run -show combi -modi combi"
+
+# Window switcher.
+bindsym $mod+g exec "rofi -show window"
+
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -94,7 +105,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -154,6 +165,30 @@ mode "resize" {
 bindsym $mod+p mode "resize"
 
 
+# From https://faq.i3wm.org/question/4615/how-can-i-move-a-floating-window-with-keys/index.html
+
+##
+# move floating windows with keys
+bindsym $mod+Shift+m mode "move" focus floating
+mode "move" {
+    bindsym $mod+Tab focus right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    bindsym h     move left 30px
+    bindsym j     move down 30px
+    bindsym k     move up 30px
+    bindsym l     move right 30px
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
 
 
 
@@ -205,7 +240,8 @@ set $custom #1c5766
 #set $custom #e1cab3
 
 # $i3-background
-exec_always --no-startup-id xsetroot -solid '$baseA2'
+# This doesn't seem to work when using xcompmgr.
+# exec_always --no-startup-id xsetroot -solid '$baseA2'
 
 ###################
 # solarized (clean)
@@ -236,18 +272,23 @@ client.focused_inactive   $baseB0 $custom $baseB2 $violet
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-   status_command i3status
-      tray_output DVI-I-1
+    # Use i3blocks instead of i3status.
+    # status_command i3status
+    status_command i3blocks
+    # I only want tray icons to appear on my primary monitor, which is this one.
+	# Run the xrandr command for a list of displays.
+    tray_output DVI-I-1
 
-      #colors {
-         #background #002b36
-            #statusline #839496
-            #separator  #586e75
-            #focused_workspace  #b58900 #b58900 #002b36
-            #active_workspace   #586e75 #586e75 #002b36
-            #inactive_workspace #073642 #002b36 #839496
-            #urgent_workspace #dc322f #dc322f #fdf6e3
-      #}
+    # tray_output HDMI-0
+    # colors {
+        # background #002b36
+        # statusline #839496
+        # separator  #586e75
+        # focused_workspace  #b58900 #b58900 #002b36
+        # active_workspace   #586e75 #586e75 #002b36
+        # inactive_workspace #073642 #002b36 #839496
+        # urgent_workspace #dc322f #dc322f #fdf6e3
+    # }
 
 
 
@@ -289,11 +330,13 @@ colors {
 }
 }
 
+# Media keys, requires amixer.
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioLowerVolume exec amixer set Master 5%- unmute
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ unmute
 
-# Media keys for programs that don't work out of the box like spotify.
+# Media keys for programs that don't work out of the box like spotify. Requires
+# the playerctl command.
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
@@ -301,49 +344,64 @@ bindsym XF86AudioPrev exec playerctl previous
 # Switch keyboard layouts.
 bindsym $mod+k exec setxkbmap us
 bindsym $mod+m exec setxkbmap us -variant colemak
-# Launch some programs.
-bindsym $mod+j exec firefox
+# Key bindings to launch programs.
+bindsym $mod+j exec firefox-bin
+bindsym $mod+Shift+j exec firefox-bin --private-window
 bindsym $mod+l exec pcmanfm
+bindsym $mod+Shift+u exec miniterm -e ranger
 bindsym $mod+u exec spotify
 bindsym $mod+y exec chromium
 # bindsym $mod+; exec discord
 
 
-# Old
-# workspace 1 output DVI-I-1
-# workspace 2 output HDMI-0
-# workspace 3 output DVI-I-1
-# workspace 4 output DVI-I-1
-# workspace 5 output DVI-I-1
-# workspace 6 output DVI-I-1
+# Show workspaces on specific monitors. See xrandr for a list of displays.
+workspace 1 output DVI-I-1
+workspace 2 output HDMI-0
+workspace 3 output HDMI-0
+workspace 4 output HDMI-0
+workspace 5 output DVI-I-1
+workspace 6 output DVI-I-1
+workspace 7 output DVI-I-1
+workspace 8 output DVI-I-1
+workspace 9 output DVI-I-1
+workspace 10 output DVI-I-1
 
-# New
-# workspace 1 output HDMI-0
-# workspace 2 output DVI-I-0
-# workspace 3 output HDMI-0
-# workspace 4 output HDMI-0
-# workspace 5 output HDMI-0
-# workspace 6 output HDMI-0
 
-#workspace 1 output DVI-I-1
-#workspace 2 output HDMI-0
-#workspace 3 output DVI-I-1
-#workspace 4 output DVI-I-1
-
-# workspace_layout tabbed
+# Make all workspaces use stacked layout by default.
 workspace_layout stacking
 
+# This is so that Steam Big Picture works as expected when launching games. This
+# line stops VLC from working with fullscreen. This line was inserted probably
+# several years ago, and now I don't know what it does. Commenting it out
+# doesn't seem to cause problems with Steam.
+# popup_during_fullscreen leave_fullscreen
 
 
+# Settings related to i3 gaps. Not currently in use.
+
+# You can also use any non-zero value if you'd like to have a border
+# for_window [class=".*"] border pixel 1
+# gaps inner 20
+# gaps outer 10
+
+
+
+
+
+# Shortcut for screenshot program.
 bindsym Print exec xfce4-screenshooter
 
 
+# Make some applications floating by default. Use the xprop command and then
+# click on a windwo to find its class.
 for_window [instance = "gimp"] floating enable
 for_window [class="UE4Editor"] floating enable
 #for_window [instance="gtk-recordMyDesktop"] floating enable
 #for_window [instance="simplescreenrecorder"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="steam"] floating enable
+for_window [class="Minecraft Launcher"] floating enable
+for_window [class="minecraft-launcher"] floating enable
 # for_window [workspace="4"] floating enable
 
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
@@ -359,34 +417,63 @@ for_window [class="steam"] floating enable
 # for_window [title="^Steam Keyboard$"] floating enable
 
 
+# Assign applications to specific workspaces. Use the xprop command and then
+# click on a windwo to find its class.
 assign [instance="simplescreenrecorder"] 2
 assign [instance="gtk-recordMyDesktop"] 2
-assign [class="Steam"] 4
+assign [class="Steam"] 6
 #for_window [class="Stream"] floating enable
-assign [instance="rhythmbox"] 2
-assign [class="TeamSpeak 3"] 2
-assign [class="Mumble"] 2
-assign [class="Discord"] 2
-assign [class="discord"] 2
+assign [instance="rhythmbox"] 3
+assign [class="TeamSpeak 3"] 4
+assign [class="Mumble"] 4
+assign [class="Discord"] 4
+assign [class="discord"] 4
+assign [class="Element"] 4
+assign [class="element"] 4
 assign [class="Deluge"] 2
-assign [class="Clementine"] 2
-assign [class="Google Play Music Desktop Player"] 2
+assign [class="Clementine"] 3
+# assign [class="Google Play Music Desktop Player"] 3
 assign [class="Syncthing GTK"] 2
-assign [class="UE4Editor"] 3
-assign [class="KeePass2"] 2
-assign [class="Keepassx2"] 2
+# assign [class="UE4Editor"] 3
+# assign [class="KeePass2"] 2
+# assign [class="Keepassx2"] 2
+assign [class="Riot"] 4
 
-# For Gentoo, not Arch Linux
-# exec /usr/libexec/polkit-gnome-authentication-agent-1
-# Screen saver.
-# exec xscreensaver -nosplash
+
+
+# Run programs on startup.
+
+# Run a notification daemon to display notifications from applications.
+exec /usr/lib64/xfce4/notifyd/xfce4-notifyd
+exec xscreensaver -nosplash
+# exec nm-applet
+exec blueman-applet
 # For an input manager. It doesn't completely work when this is in ~/.xprofile.
-# exec ibus-daemon -drx
-# For Arch Linux.
+exec ibus-daemon -drx
+# Notification daemon for Arch Linux.
 # exec /usr/lib/polkit-gnome/
 # exec dropbox
-# exec pcmanfm -d
-#exec "dropbox start"
-#exec redshift-gtk
+# Launch pcmanfm in daemon mode so that it handles insertion of removable media
+# (e.g. flash drives).
+exec pcmanfm -d
+# exec urxvtd --quiet --opendisplay --fork
+# Clipboard manager.
+exec xfce4-clipman
+# exec "dropbox start"
+# f.flux linux version.
+exec redshift-gtk
 #exec discord-canary
-#exec xfce4-clipman
+# exec compton -bc --unredir-if-possible
+# Compositor, makes transparency work, and possibly shadows. I got this command
+# from Zoom documentation, which recommended the command to get Zoom fully
+# working on linux.
+exec xcompmgr -c -l0 -t0 -r0 -o.00
+exec steam
+exec element-desktop
+exec discord
+# exec blueman-applet
+# exec discord-ptb
+# exec discord-local
+
+# Wallpaper, the color is taken directly from solarized.
+exec while true; do feh --bg-max --image-bg=#002b36 --randomize ~/Pictures/wallpapers; sleep 60; done
