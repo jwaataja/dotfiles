@@ -64,7 +64,7 @@ end
 
 # Doesn't use symlinks because files are written to by programs such as Plasma
 mod :gtk do |m|
-  m.file "gtk/.gtkrc-2.0" "~/.gtkrc-2.0"
-  m.file "gtk/settings.ini" "~/.config/gtk-3.0/settings.ini"
-  m.file "gtk/index.theme" "~/.icons/default/index.theme"
-gtk
+  m.file "gtk/.gtkrc-2.0", ".gtkrc-2.0"
+  m.file "gtk/settings.ini", ".config/gtk-3.0/settings.ini"
+  m.file "gtk/index.theme", ".icons/default/index.theme"
+end
