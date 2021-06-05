@@ -97,7 +97,7 @@ Plug 'neovimhaskell/haskell-vim'
 " Formatting
 " Plug 'sdiehl/vim-ormolu'
 " Indentation
-Plug 'alx741/vim-hindent'
+" Plug 'alx741/vim-hindent'
 
 " For formatting code.
 " This plugin automatically formats code on save.
@@ -335,6 +335,8 @@ set background=dark
 colorscheme solarized8
 " Enable transparent background.
 let g:solarized_termtrans = 1
+" hi NonText guifg=250 guifg=none
+" hi Normal guifg=252 guibg=none
 " 8
 " colorscheme solarized
 " 10
@@ -787,7 +789,7 @@ let g:autopep8_disable_show_diff=1
 
 " Automatically format files with clang-format on save. Warning, this includes
 " Java.
-let g:clang_format#auto_format = 1
+" let g:clang_format#auto_format = 1
 
 " C# programming
 let g:OmniSharp_server_stdio = 1
@@ -799,7 +801,7 @@ let g:OmniSharp_server_use_mono = 1
 " let g:ormolu_disable=1
 " nnoremap hf :call RunOrmolu()<CR>
 
-" Enable more highlighting in Haskell
+" Enable more highlighting in Haskell using haskell-vim
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
 let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
@@ -808,6 +810,8 @@ let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 " g:haskell_classic_highlighting = 1
+
+au BufWritePre *.hs :Format
 
 " Ruby settings
 " Enable folding of language constructs like blocks
