@@ -39,6 +39,7 @@ Plug 'aonemd/kuroi.vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'ayu-theme/ayu-vim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+Plug 'srcery-colors/srcery-vim'
 
 " Syntax highlighting
 " For C, choose one of these.
@@ -46,6 +47,7 @@ Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 " Plug 'justinmk/vim-syntax-extra'
 " Plug 'jaxbot/semantic-highlight.vim'
 " This plugin is a collection of language packs for syntax highlighting.
+" Note, this causes undesired red highlighting in Python when typing.
 Plug 'sheerun/vim-polyglot'
 " For C++
 " Plug 'bfrg/vim-cpp-modern'
@@ -112,6 +114,9 @@ Plug 'JuliaEditorSupport/julia-vim'
 " For writing HTML.
 " HTML and CSS validation
 Plug 'arunsahadeo/webval'
+
+" For shell scripting
+Plug 'itspriddle/vim-shellcheck'
 
 " LaTeX
 " Two competing plugins: vim-latex and vimtex
@@ -240,9 +245,9 @@ set shiftwidth=4
 " Display whitespace characters using special symbols.
 " set listchars=eol:$,tab:»-,trail:~,extends:<,precedes:>,space:·
 " The real one.
-" set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
+set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,space:·,eol:¬
 " This version is solarized friendly
-set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,eol:¬
+" set listchars=tab:▸\ ,trail:~,extends:<,precedes:>,eol:¬
 set list
 
 " Fold settings
@@ -332,15 +337,14 @@ set background=dark
 " This is the one to use instead of vanilla solarized. Works better without
 " terminal configuration.
 " 8
-colorscheme solarized8
+" colorscheme solarized8
 " Enable transparent background.
-let g:solarized_termtrans = 1
-" hi NonText guifg=250 guifg=none
-" hi Normal guifg=252 guibg=none
+" let g:solarized_termtrans = 1
 " 8
 " colorscheme solarized
 " 10
 " colorscheme gruvbox
+colorscheme srcery
 " This is Atom's default dark theme
 " 5
 " colorscheme atom-dark
@@ -380,6 +384,12 @@ let g:onedark_termcolors=256
     " set termguicolors
 " endif
 " colorscheme spaceduck
+
+" Enable a transparent background. These lines must be placed after the
+" colorscheme command. I think they use the terminal's background color, so that
+" must match the scheme in some way.
+" hi NonText guifg=250 guifg=none
+" hi Normal guifg=252 guibg=none
 
 
 " Fonts
@@ -771,6 +781,10 @@ let g:vimtex_quickfix_ignore_filters = [
 
 " Python stuff
 
+" Don't use python-syntax's highlight trailing whitespace feature, installed by
+" vim-polyglot.
+let g:python_highlight_space_errors = 0
+
 " autocmd BufWrite *.py Autopep8
 let g:autopep8_disable_show_diff=1
 
@@ -810,6 +824,9 @@ let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 " g:haskell_classic_highlighting = 1
+
+" haskell-vim indentation settings
+let g:haskell_indent_if = 2
 
 au BufWritePre *.hs :Format
 

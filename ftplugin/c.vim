@@ -13,12 +13,17 @@ setlocal cinoptions=>s,:0,=s,t0,(s
 " setlocal cinoptions=>s,:0,=s,t0,+0.5s,(0.5s
 " setlocal noexpandtab
 
-setlocal formatoptions=cqtr
-setlocal tabstop=8
-setlocal softtabstop=8
-setlocal shiftwidth=8
-setlocal textwidth=79
-setlocal smarttab
+" Real settings
+" setlocal formatoptions=cqtr
+" setlocal tabstop=8
+" setlocal softtabstop=8
+" setlocal shiftwidth=8
+" setlocal textwidth=79
+" setlocal smarttab
+
+setlocal expandtab
+set tabstop=2
+set shiftwidth=2
 
 
 " All of this stuff is for gnu style.
