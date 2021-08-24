@@ -68,3 +68,7 @@ mod :gtk do |m|
   m.file "gtk/settings.ini", ".config/gtk-3.0/settings.ini"
   m.file "gtk/index.theme", ".icons/default/index.theme"
 end
+
+mod :rofi do |m|
+  m.directory_sym "rofi" "~/.config/rofi"
+end

@@ -1,0 +1,15 @@
+configuration {
+	/* theme: "/usr/share/rofi/themes/solarized.rasi"; */
+	show-icons: true;
+	font: "Cantarell 15";
+	/* fullscreen: true; */
+}
+
+@import "/usr/share/rofi/themes/solarized.rasi"
+
+/*
+window {
+	transparency: "real";
+	background-color: #002b36E0;
+}
+*/
