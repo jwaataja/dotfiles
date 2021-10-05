@@ -28,6 +28,7 @@ end
 
 mod :i3 do |m|
   m.file_sym ".config/i3/config"
+  m.directory ".config/i3blocks"
   # TODO: Setup i3 blocks.
   # m.file ".i3status.conf"
   m.install do
