@@ -188,6 +188,9 @@ mode "move" {
     bindsym Escape mode "default"
 }
 
+# Suspend system (may only work on Gentoo).
+bindsym $mod+Shift+s exec loginctl suspend
+
 
 
 
@@ -348,8 +351,9 @@ bindsym $mod+m exec setxkbmap us -variant colemak
 bindsym $mod+j exec firefox-bin
 bindsym $mod+Shift+j exec firefox-bin --private-window
 bindsym $mod+l exec pcmanfm
-bindsym $mod+Shift+u exec miniterm -e ranger
+bindsym $mod+Shift+l exec miniterm -e ranger
 bindsym $mod+u exec spotify
+bindsym $mod+Shift+u exec miniterm -e cmus
 bindsym $mod+y exec chromium
 # bindsym $mod+; exec discord
 
@@ -476,4 +480,5 @@ exec discord
 # exec discord-local
 
 # Wallpaper, the color is taken directly from solarized.
-exec while true; do feh --bg-max --image-bg=#002b36 --randomize ~/Pictures/wallpapers; sleep 60; done
+# exec while true; do feh --bg-max --image-bg=#002b36 --randomize ~/Pictures/wallpapers; sleep 60; done
+# exec ~/.cabal/bin/jws

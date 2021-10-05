@@ -546,6 +546,7 @@ nnoremap <leader>dt :%s/\s\+$//g<cr>``
 
 nnoremap <C-p> :Files<cr>
 nnoremap <A-p> :GFiles<cr>
+nnoremap <A-b> :Buffers<cr>
 
 
 
