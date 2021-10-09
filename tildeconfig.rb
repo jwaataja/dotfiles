@@ -58,6 +58,11 @@ mod :zsh do |m|
   end
 end
 
+mod :bash do |m|
+  m.file ".profile"
+  m.file ".bashrc"
+end
+
 mod :x do |m|
   m.file ".Xresources"
   m.file ".xprofile"
