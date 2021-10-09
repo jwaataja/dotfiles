@@ -21,6 +21,10 @@ mod :miniterm do |m|
   m.file_sym ".config/miniterm/miniterm.conf"
 end
 
+mod :alacritty do |m|
+  m.file_sym ".config/alacritty/alacritty.yml"
+end
+
 mod :emacs do |m|
   m.file ".emacs"
   m.file ".emacs.d"
