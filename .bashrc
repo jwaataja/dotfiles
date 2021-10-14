@@ -107,7 +107,15 @@ alias gcsm='git commit -s -m'
 alias gcas='git commit -a -s'
 alias gcasm='git commit -a -s -m'
 alias gcb='git checkout -b'
-alias gcf='git config --list'
+alias gst='git status'
+alias gl='git pull'
+alias gp='git push'
+
+# Other aliases.
+alias rfl='rifle'
+alias rng='ranger'
+alias rgi='rg -i'
+alias pag='ps aux | grep -i'
 
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
