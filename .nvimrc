@@ -32,7 +32,9 @@ Plug 'mhartington/oceanic-next'
 Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
 Plug 'gosukiwi/vim-atom-dark'
-Plug 'ghifarit53/tokyonight-vim'
+" Looks like it moved to a new repository?
+" Plug 'ghifarit53/tokyonight-vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'habamax/vim-gruvbit'
 Plug 'jsit/toast.vim'
 Plug 'aonemd/kuroi.vim'
@@ -40,15 +42,23 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'ayu-theme/ayu-vim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'srcery-colors/srcery-vim'
+Plug 'jacoborus/tender.vim'
+Plug 'EdenEast/nightfox.nvim'
+Plug 'sainnhe/sonokai'
+
+" For some more suggestions, see https://benfrain.com/the-best-neovim-color-schemes-in-2021/
 
 " Syntax highlighting
 " For C, choose one of these.
 " Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'justinmk/vim-syntax-extra'
 " Plug 'jaxbot/semantic-highlight.vim'
+"
 " This plugin is a collection of language packs for syntax highlighting.
 " Note, this causes undesired red highlighting in Python when typing.
 Plug 'sheerun/vim-polyglot'
+
+
 " For C++
 " Plug 'bfrg/vim-cpp-modern'
 
@@ -139,6 +149,8 @@ Plug 'junegunn/fzf.vim'
 
 " Use ripgrep in vim
 Plug 'jremmen/vim-ripgrep'
+" Interface with ack, a convenient tool for searching projects.
+Plug 'mileszs/ack.vim'
 
 " For taking notes and stuff.
 Plug 'vimoutliner/vimoutliner'
@@ -287,12 +299,6 @@ let g:gruvbox_italic=1
 " let g:gruvbox_contrast_light = "soft"
 " let g:gruvbox_termcolors=16
 
-" Settings for Tokyo Night colorscheme, requires termguicolors
-" let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_style = 'storm' " available: night, storm
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_disable_italic_comment = 1
-
 " Highlight trailing whitespace.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -306,7 +312,7 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Colors
 " Many colorschemes use this setting, such as solarized and gruvbox.
-set background=dark
+" set background=dark
 " set background=light
 
 " 0
@@ -344,7 +350,7 @@ set background=dark
 " colorscheme solarized
 " 10
 " colorscheme gruvbox
-colorscheme srcery
+" colorscheme srcery
 " This is Atom's default dark theme
 " 5
 " colorscheme atom-dark
@@ -358,8 +364,13 @@ let g:onedark_termcolors=256
 " Yet another one from atom
 " 6
 " colorscheme one
-" 7
-" colorscheme tokyonight
+" Settings for Tokyo Night colorscheme, requires termguicolors
+" let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1
+let g:tokyonight_disable_italic_comment = 1
+" 9
+colorscheme tokyonight
 " 8
 " colorscheme gruvbit
 " 6
@@ -390,6 +401,25 @@ let g:onedark_termcolors=256
 " must match the scheme in some way.
 " hi NonText guifg=250 guifg=none
 " hi Normal guifg=252 guibg=none
+" 7
+" colorscheme tender
+" 6
+" colorscheme nightfox
+" 5
+" colorscheme nordfox
+" 6
+" colorscheme palefox
+" 9
+" The configuration options should be placed before `colorscheme sonokai`.
+" let g:sonokai_style = 'andromeda'
+let g:sonokai_style = 'atlantis'
+" let g:sonokai_style = 'shusia'
+" let g:sonokai_style = 'maia'
+" let g:sonokai_style = 'espresso'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+
+colorscheme sonokai
 
 
 " Fonts
@@ -734,6 +764,39 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" vim-ripgrep plugin
+" Don't search in the current directory, but navigate up until finding a
+" directory that looks like the project root. Allows searching the whole project
+" from within a subdirectory.
+let g:rg_derive_root = 1
+" Add to this to recognize different types of project roots.
+let g:rg_root_types = ['.git']
+
+" ack.nvim plugin
+" Source: https://www.freecodecamp.org/news/how-to-search-project-wide-vim-ripgrep-ack/
+" Use ripgrep for searching.
+" Options include:
+" --vimgrep -> Needed to parse the rg response properly for ack.vim
+" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
+let g:ackprg = 'rg --vimgrep --smart-case'
+
+" Auto close the Quickfix list after pressing '<enter>' on a list item
+let g:ack_autoclose = 1
+
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
+
+" Don't jump to first match
+cnoreabbrev Ack Ack!
+
+" Maps <leader>/ so we're ready to type the search keyword
+nnoremap <Leader>/ :Ack!<Space>
+" }}}
+
+" Navigate quickfix list with ease
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+
 
 
 
@@ -746,7 +809,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " default.
 " let ch_syntax_for_h = 1
 " let g:c_syntax_for_h = 1
-" let c_syntax_for_h = 1
+let c_syntax_for_h = 1
 
 " Rust
 " Automatically format rust code on save.
