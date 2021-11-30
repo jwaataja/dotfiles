@@ -149,6 +149,8 @@ Plug 'junegunn/fzf.vim'
 
 " Use ripgrep in vim
 Plug 'jremmen/vim-ripgrep'
+" Interface with ack, a convenient tool for searching projects.
+Plug 'mileszs/ack.vim'
 
 " For taking notes and stuff.
 Plug 'vimoutliner/vimoutliner'
@@ -761,6 +763,39 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" vim-ripgrep plugin
+" Don't search in the current directory, but navigate up until finding a
+" directory that looks like the project root. Allows searching the whole project
+" from within a subdirectory.
+let g:rg_derive_root = 1
+" Add to this to recognize different types of project roots.
+let g:rg_root_types = ['.git']
+
+" ack.nvim plugin
+" Source: https://www.freecodecamp.org/news/how-to-search-project-wide-vim-ripgrep-ack/
+" Use ripgrep for searching.
+" Options include:
+" --vimgrep -> Needed to parse the rg response properly for ack.vim
+" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
+let g:ackprg = 'rg --vimgrep --smart-case'
+
+" Auto close the Quickfix list after pressing '<enter>' on a list item
+let g:ack_autoclose = 1
+
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
+
+" Don't jump to first match
+cnoreabbrev Ack Ack!
+
+" Maps <leader>/ so we're ready to type the search keyword
+nnoremap <Leader>/ :Ack!<Space>
+" }}}
+
+" Navigate quickfix list with ease
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
 
 
 
