@@ -80,5 +80,5 @@ mod :gtk do |m|
 end
 
 mod :rofi do |m|
-  m.directory_sym "rofi" "~/.config/rofi"
+  m.directory_sym "rofi", ".config/rofi"
 end
