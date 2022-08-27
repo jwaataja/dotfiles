@@ -148,7 +148,7 @@ Plug 'junegunn/fzf.vim'
 " Plug 'ctrlpvim/ctrlp.vim'
 
 " Use ripgrep in vim
-Plug 'jremmen/vim-ripgrep'
+" Plug 'jremmen/vim-ripgrep'
 " Interface with ack, a convenient tool for searching projects.
 Plug 'mileszs/ack.vim'
 
@@ -370,7 +370,7 @@ let g:tokyonight_style = 'storm' " available: night, storm
 let g:tokyonight_enable_italic = 1
 let g:tokyonight_disable_italic_comment = 1
 " 9
-colorscheme tokyonight
+" colorscheme tokyonight
 " 8
 " colorscheme gruvbit
 " 6
@@ -396,11 +396,6 @@ colorscheme tokyonight
 " endif
 " colorscheme spaceduck
 
-" Enable a transparent background. These lines must be placed after the
-" colorscheme command. I think they use the terminal's background color, so that
-" must match the scheme in some way.
-" hi NonText guifg=250 guifg=none
-" hi Normal guifg=252 guibg=none
 " 7
 " colorscheme tender
 " 6
@@ -412,14 +407,23 @@ colorscheme tokyonight
 " 9
 " The configuration options should be placed before `colorscheme sonokai`.
 " let g:sonokai_style = 'andromeda'
-let g:sonokai_style = 'atlantis'
+" let g:sonokai_style = 'atlantis'
 " let g:sonokai_style = 'shusia'
-" let g:sonokai_style = 'maia'
+let g:sonokai_style = 'maia'
 " let g:sonokai_style = 'espresso'
 let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
+" let g:sonokai_disable_italic_comment = 1
 
 colorscheme sonokai
+" set t_ZH=^[[3m
+" set t_ZR=^[[23m
+" highlight Comment cterm=italic
+
+" Enable a transparent background. These lines must be placed after the
+" colorscheme command. I think they use the terminal's background color, so that
+" must match the scheme in some way.
+" hi NonText guifg=250 guifg=none
+" hi Normal guifg=252 guibg=none
 
 
 " Fonts
@@ -891,6 +895,8 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 
 " haskell-vim indentation settings
 let g:haskell_indent_if = 2
+let g:haskell_indent_before_where = 1
+let g:haskell_indent_after_bare_where = 1
 
 au BufWritePre *.hs :Format
 
