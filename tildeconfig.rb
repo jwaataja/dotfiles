@@ -82,3 +82,7 @@ end
 mod :rofi do |m|
   m.directory_sym "rofi" "~/.config/rofi"
 end
+
+mod :mpv do |m|
+  m.directory_sym ".config/mpv"
+end
